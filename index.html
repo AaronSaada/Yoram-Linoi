@@ -6,7 +6,7 @@
   <title>Yoram & Linoï — Célébration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,8 +23,8 @@
     <nav class="nav-links" id="navMenu">
       <a href="#hero">Accueil</a>
       <a href="#edito">L'Invitation</a>
-      <a href="#programme">Programme</a>
-      <a href="#lieux">Lieux</a>
+      <a href="#mairie">Mairie</a>
+      <a href="#houppa">Houppa & Soirée</a>
       <a href="#rsvp" class="nav-cta">RSVP</a>
     </nav>
   </header>
@@ -91,112 +91,142 @@
     </div>
   </section>
 
-  <!-- Compte à Rebours -->
-  <section class="section countdown-section">
-    <div class="container">
-      <div class="countdown-grid" id="countdown">
-        <div class="countdown-item">
-          <span class="countdown-number" id="days">000</span>
-          <span class="countdown-label">Jours</span>
+  <!-- Section 1 : Cérémonie Civile (Mairie) -->
+  <section class="section event-section" id="mairie">
+    <div class="container-narrow">
+      <div class="section-header">
+        <p class="subtitle">Union Civile</p>
+        <h2 class="section-title">La Mairie</h2>
+      </div>
+
+      <div class="event-card-single">
+        <div class="event-names-badge">
+          <span>YORAM</span>
+          <span class="ampersand">&</span>
+          <span>LINOÏ</span>
         </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="hours">00</span>
-          <span class="countdown-label">Heures</span>
+
+        <p class="event-announcement">Se diront « oui » devant Monsieur le Maire</p>
+
+        <div class="event-datetime">
+          <p class="event-date">Mercredi 07 Juillet 2027</p>
+          <p class="event-time">à 14 heures 00</p>
         </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="minutes">00</span>
-          <span class="countdown-label">Minutes</span>
+
+        <!-- DÉCOMPTE MAIRIE INTÉGRÉ -->
+        <div class="card-countdown" id="countdown-mairie">
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="mairie-days">000</span>
+            <span class="card-countdown-label">Jours</span>
+          </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="mairie-hours">00</span>
+            <span class="card-countdown-label">Heures</span>
+          </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="mairie-minutes">00</span>
+            <span class="card-countdown-label">Min</span>
+          </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="mairie-seconds">00</span>
+            <span class="card-countdown-label">Sec</span>
+          </div>
         </div>
-        <div class="countdown-separator">:</div>
-        <div class="countdown-item">
-          <span class="countdown-number" id="seconds">00</span>
-          <span class="countdown-label">Secondes</span>
+
+        <div class="event-location-box">
+          <h3 class="location-name">Mairie du 8ᵉ Arrondissement de Paris</h3>
+          <p class="location-address">56 Boulevard Malesherbes, 75008 Paris</p>
+
+          <div class="location-actions">
+            <a href="https://maps.google.com/?q=Mairie+du+8e+Paris" target="_blank" rel="noopener" class="link-action">Google Maps</a>
+            <span class="link-separator">/</span>
+            <a href="https://waze.com/ul?q=Mairie+du+8e+Paris" target="_blank" rel="noopener" class="link-action">Waze</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Programme -->
-  <section class="section programme" id="programme">
-    <div class="container">
+  <!-- Section 2 : Houppa & Soirée -->
+  <section class="section event-section" id="houppa">
+    <div class="container-narrow">
       <div class="section-header">
-        <p class="subtitle">La Chronique</p>
-        <h2 class="section-title">L'Ordre du Jour</h2>
+        <p class="subtitle">Bénédiction & Réception</p>
+        <h2 class="section-title">Houppa & Soirée de Gala</h2>
       </div>
 
-      <div class="timeline">
-        <article class="timeline-entry">
-          <div class="timeline-time">15 : 30</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-details">
-            <h3 class="event-title">Cérémonie Solennelle</h3>
-            <p class="event-desc">L'échange des vœux et la bénédiction des alliances.</p>
+      <div class="event-card-single houppa-card">
+        <!-- Annonce solennelle des familles -->
+        <div class="families-block">
+          <div class="family-column">
+            <h4 class="family-role">Famille de la Mariée</h4>
+            <p class="family-members">M. & Mme [Parents de Linoï]</p>
           </div>
-        </article>
-
-        <article class="timeline-entry">
-          <div class="timeline-time">17 : 30</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-details">
-            <h3 class="event-title">Cocktail & Champagne</h3>
-            <p class="event-desc">Coupes de bienvenue et créations gastronomiques dans la cour d'honneur.</p>
-          </div>
-        </article>
-
-        <article class="timeline-entry">
-          <div class="timeline-time">20 : 00</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-details">
-            <h3 class="event-title">Le Dîner d'Honneur</h3>
-            <p class="event-desc">Un menu d'exception rythmé par les discours et les attentions.</p>
-          </div>
-        </article>
-
-        <article class="timeline-entry">
-          <div class="timeline-time">23 : 30</div>
-          <div class="timeline-dot"></div>
-          <div class="timeline-details">
-            <h3 class="event-title">Ouverture de Nuit</h3>
-            <p class="event-desc">Célébration dansante jusqu'au lever du jour.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lieux & Accès -->
-  <section class="section lieux" id="lieux">
-    <div class="container">
-      <div class="section-header">
-        <p class="subtitle">Adresses</p>
-        <h2 class="section-title">Les Écrins du Jour J</h2>
-      </div>
-
-      <div class="places-grid">
-        <div class="place-card">
-          <span class="place-badge">Cérémonie</span>
-          <h3 class="place-name">Hôtel Salomon de Rothschild</h3>
-          <p class="place-address">11 Rue Berryer, 75008 Paris</p>
-          <p class="place-info">Un hôtel particulier néo-classique au cœur du 8e arrondissement.</p>
-          <div class="place-actions">
-            <a href="https://maps.google.com" target="_blank" rel="noopener" class="link-action">Google Maps</a>
-            <span class="link-separator">/</span>
-            <a href="https://waze.com" target="_blank" rel="noopener" class="link-action">Waze</a>
+          <div class="family-divider"></div>
+          <div class="family-column">
+            <h4 class="family-role">Famille du Marié</h4>
+            <p class="family-members">M. & Mme SAADA</p>
           </div>
         </div>
 
-        <div class="place-card">
-          <span class="place-badge">Réception & Soirée</span>
-          <h3 class="place-name">Pavillon Cambon Capucines</h3>
-          <p class="place-address">46 Rue Cambon, 75001 Paris</p>
-          <p class="place-info">Dans l'épicentre de la haute couture parisienne et de la rue mythique.</p>
-          <div class="place-actions">
-            <a href="https://maps.google.com" target="_blank" rel="noopener" class="link-action">Google Maps</a>
-            <span class="link-separator">/</span>
-            <a href="https://waze.com" target="_blank" rel="noopener" class="link-action">Waze</a>
+        <p class="families-honor">
+          Ont la joie et l'honneur de vous convier à la consécration sous la Houppa
+          du mariage de leurs enfants
+        </p>
+
+        <!-- Titre des mariés -->
+        <div class="event-names-badge">
+          <span>YORAM</span>
+          <span class="ampersand">&</span>
+          <span>LINOÏ</span>
+        </div>
+
+        <div class="event-datetime">
+          <p class="event-date">Mercredi 07 Juillet 2027</p>
+          <p class="event-time">à 17 heures 30 précises</p>
+        </div>
+
+        <!-- DÉCOMPTE HOUPPA INTÉGRÉ -->
+        <div class="card-countdown" id="countdown-houppa">
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="houppa-days">000</span>
+            <span class="card-countdown-label">Jours</span>
           </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="houppa-hours">00</span>
+            <span class="card-countdown-label">Heures</span>
+          </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="houppa-minutes">00</span>
+            <span class="card-countdown-label">Min</span>
+          </div>
+          <span class="card-countdown-separator">:</span>
+          <div class="card-countdown-item">
+            <span class="card-countdown-number" id="houppa-seconds">00</span>
+            <span class="card-countdown-label">Sec</span>
+          </div>
+        </div>
+
+        <div class="event-location-box">
+          <h3 class="location-name">Pavillon Cambon Capucines</h3>
+          <p class="location-address">46 Rue Cambon, 75001 Paris</p>
+          <p class="event-subnotice">La cérémonie religieuse sera immédiatement suivie du cocktail et de la soirée dansante</p>
+
+          <div class="location-actions">
+            <a href="https://maps.google.com/?q=Pavillon+Cambon+Capucines+Paris" target="_blank" rel="noopener" class="link-action">Google Maps</a>
+            <span class="link-separator">/</span>
+            <a href="https://waze.com/ul?q=Pavillon+Cambon+Capucines+Paris" target="_blank" rel="noopener" class="link-action">Waze</a>
+          </div>
+        </div>
+
+        <!-- Hommage discret (facultatif) -->
+        <div class="memorial-box">
+          <p>Une pensée émue pour nos grands-parents qui nous accompagnent dans nos cœurs en cette journée d'exception.</p>
         </div>
       </div>
     </div>

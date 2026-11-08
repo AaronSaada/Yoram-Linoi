@@ -9,18 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
  * 1. Gestion de la Navigation & du Menu Mobile
  */
 function initNavbar() {
-  const navbar = document.getElementById('navbar');
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
   const navLinks = navMenu.querySelectorAll('a');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  }, { passive: true });
 
   navToggle.addEventListener('click', () => {
     const isOpen = navMenu.classList.toggle('active');
@@ -38,27 +29,38 @@ function initNavbar() {
     });
   });
 }
-
 /**
- * 2. Compte à Rebours Dynamique (07 Juillet 2027)
+ * 2. Décomptes intégrés aux cartes (Mairie à 14h00 & Houppa à 17h30)
  */
 function initCountdown() {
-  const targetDate = new Date('2027-07-07T15:30:00+02:00').getTime();
+  const targetMairie = new Date('2027-07-07T14:00:00+02:00').getTime();
+  const targetHouppa = new Date('2027-07-07T17:30:00+02:00').getTime();
 
-  const daysEl = document.getElementById('days');
-  const hoursEl = document.getElementById('hours');
-  const minutesEl = document.getElementById('minutes');
-  const secondsEl = document.getElementById('seconds');
+  const mairieEls = {
+    days: document.getElementById('mairie-days'),
+    hours: document.getElementById('mairie-hours'),
+    minutes: document.getElementById('mairie-minutes'),
+    seconds: document.getElementById('mairie-seconds')
+  };
 
-  function updateTimer() {
+  const houppaEls = {
+    days: document.getElementById('houppa-days'),
+    hours: document.getElementById('houppa-hours'),
+    minutes: document.getElementById('houppa-minutes'),
+    seconds: document.getElementById('houppa-seconds')
+  };
+
+  function updateCardTimer(targetDate, elements) {
+    if (!elements.days) return;
+
     const now = new Date().getTime();
     const distance = targetDate - now;
 
     if (distance <= 0) {
-      daysEl.textContent = '00';
-      hoursEl.textContent = '00';
-      minutesEl.textContent = '00';
-      secondsEl.textContent = '00';
+      elements.days.textContent = '00';
+      elements.hours.textContent = '00';
+      elements.minutes.textContent = '00';
+      elements.seconds.textContent = '00';
       return;
     }
 
@@ -67,14 +69,19 @@ function initCountdown() {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    daysEl.textContent = String(days).padStart(2, '0');
-    hoursEl.textContent = String(hours).padStart(2, '0');
-    minutesEl.textContent = String(minutes).padStart(2, '0');
-    secondsEl.textContent = String(seconds).padStart(2, '0');
+    elements.days.textContent = String(days).padStart(2, '0');
+    elements.hours.textContent = String(hours).padStart(2, '0');
+    elements.minutes.textContent = String(minutes).padStart(2, '0');
+    elements.seconds.textContent = String(seconds).padStart(2, '0');
   }
 
-  updateTimer();
-  setInterval(updateTimer, 1000);
+  function tick() {
+    updateCardTimer(targetMairie, mairieEls);
+    updateCardTimer(targetHouppa, houppaEls);
+  }
+
+  tick();
+  setInterval(tick, 1000);
 }
 
 /**
@@ -148,7 +155,7 @@ function initRSVPForm() {
  */
 function initScrollAnimations() {
   const elementsToAnimate = document.querySelectorAll(
-    '.timeline-entry, .place-card, .editorial-body, .countdown-grid'
+    '.event-card-single, .editorial-body, .card-countdown'
   );
 
   elementsToAnimate.forEach(el => el.classList.add('reveal-init'));

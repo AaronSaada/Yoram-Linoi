@@ -12,7 +12,7 @@
   --border-dark: #141414;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.3s ease;
@@ -94,7 +94,7 @@ body {
    3. Navigation Flottante & Logo Nav
    ========================================================================== */
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -103,15 +103,6 @@ body {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  transition: padding var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
-}
-
-.navbar.scrolled {
-  padding: 1rem 4%;
-  background-color: rgba(250, 248, 245, 0.94);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border-light);
 }
 
 .nav-brand {
@@ -367,9 +358,11 @@ body {
 }
 
 .editorial-body {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 300;
   line-height: 2;
+  letter-spacing: 0.03em;
   color: #333333;
   margin-bottom: 2.5rem;
 }
@@ -391,174 +384,152 @@ body {
 }
 
 /* ==========================================================================
-   6. Compte à Rebours
+   6. Décomptes intégrés aux cartes
    ========================================================================== */
-.countdown-section {
-  padding: 4rem 0;
-  background-color: rgba(244, 241, 234, 0.7);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-bottom: none;
-}
-
-.countdown-grid {
+.card-countdown {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(1rem, 4vw, 3.5rem);
+  gap: clamp(0.6rem, 1.8vw, 1.4rem);
+  margin-bottom: 2.2rem;
+  padding: 0.8rem 1.4rem;
+  background-color: rgba(250, 248, 245, 0.7);
+  border: 1px solid var(--border-light);
 }
 
-.countdown-item {
+.card-countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 42px;
+}
+
+.card-countdown-number {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.card-countdown-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+.card-countdown-separator {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   7. Cérémonies : Mairie & Houppa
+   ========================================================================== */
+.event-section {
+  padding: 6.5rem 0;
+  text-align: center;
+}
+
+.event-card-single {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-light);
+  padding: 4rem 3rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.countdown-number {
+.event-names-badge {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
   font-weight: 300;
-  line-height: 1;
-}
-
-.countdown-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 0.5rem;
-}
-
-.countdown-separator {
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
   margin-bottom: 1.2rem;
 }
 
-/* ==========================================================================
-   7. Programme (Timeline)
-   ========================================================================== */
-.timeline {
-  max-width: 750px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 110px;
-  width: 1px;
-  background-color: var(--border-light);
-}
-
-.timeline-entry {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 4rem;
-  position: relative;
-}
-
-.timeline-time {
-  width: 90px;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  letter-spacing: 0.2em;
+.event-names-badge .ampersand {
+  font-family: var(--font-serif);
+  font-style: italic;
   color: var(--accent-gold);
+  font-size: 1.4rem;
+}
+
+.event-announcement {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
   font-weight: 400;
-  padding-top: 4px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
 }
 
-.timeline-dot {
-  width: 7px;
-  height: 7px;
-  background-color: var(--text-main);
-  border-radius: 50%;
-  margin: 9px 30px 0 17px;
-  position: relative;
-  z-index: 2;
+.event-datetime {
+  margin-bottom: 2.5rem;
+  padding: 1.2rem 2.5rem;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
 }
 
-.timeline-details {
-  flex: 1;
+.event-date {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
 }
 
-.event-title {
+.event-time {
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-top: 0.3rem;
+}
+
+.event-location-box {
+  width: 100%;
+  max-width: 520px;
+}
+
+.location-name {
   font-family: var(--font-serif);
   font-size: 1.6rem;
   font-weight: 400;
   margin-bottom: 0.4rem;
 }
 
-.event-desc {
+.location-address {
   font-size: 0.9rem;
   color: var(--text-muted);
-}
-
-/* ==========================================================================
-   8. Lieux & Accès
-   ========================================================================== */
-.places-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
-}
-
-.place-card {
-  border: 1px solid var(--border-light);
-  padding: 3.5rem 2.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  display: flex;
-  flex-direction: column;
-  transition: transform var(--transition-fast), border-color var(--transition-fast);
-}
-
-.place-card:hover {
-  border-color: var(--accent-gold);
-  transform: translateY(-4px);
-}
-
-.place-badge {
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--accent-gold);
-  margin-bottom: 1rem;
-}
-
-.place-name {
-  font-family: var(--font-serif);
-  font-size: 1.7rem;
-  font-weight: 400;
-  line-height: 1.2;
   margin-bottom: 0.8rem;
 }
 
-.place-address {
+.event-subnotice {
   font-size: 0.85rem;
-  color: var(--text-main);
-  margin-bottom: 1rem;
+  font-style: italic;
+  color: #555555;
+  margin-bottom: 1.8rem;
 }
 
-.place-info {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-  flex-grow: 1;
-}
-
-.place-actions {
+.location-actions {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.8rem;
-  border-top: 1px solid var(--border-light);
-  padding-top: 1.5rem;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .link-action {
@@ -576,7 +547,86 @@ body {
 
 .link-separator {
   color: var(--border-light);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+}
+
+/* --- Styles propres à la Houppa & Familles --- */
+.families-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 580px;
+  margin-bottom: 2rem;
+}
+
+.family-column {
+  flex: 1;
+}
+
+.family-role {
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 0.4rem;
+}
+
+.family-members {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-main);
+}
+
+.family-divider {
+  width: 1px;
+  height: 45px;
+  background-color: var(--border-light);
+}
+
+.families-honor {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.9;
+  color: #444444;
+  max-width: 560px;
+  margin-bottom: 2rem;
+}
+
+.memorial-box {
+  margin-top: 3rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--border-light);
+  width: 100%;
+  max-width: 480px;
+}
+
+.memorial-box p {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+@media screen and (max-width: 768px) {
+  .event-card-single {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .families-block {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .family-divider {
+    width: 60px;
+    height: 1px;
+  }
 }
 
 /* ==========================================================================
@@ -910,28 +960,21 @@ body {
     line-height: 1.9;
   }
 
-  /* Compte à Rebours */
-  .countdown-section {
-    padding: 3rem 0;
-  }
-
-  .countdown-separator {
-    display: none;
-  }
-
-  .countdown-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  /* Décomptes mobiles intégrés */
+  .card-countdown {
     gap: 0.5rem;
+    padding: 0.6rem 0.8rem;
+    width: 100%;
+    max-width: 300px;
   }
 
-  .countdown-number {
-    font-size: 2rem;
+  .card-countdown-number {
+    font-size: 1.35rem;
   }
 
-  .countdown-label {
-    font-size: 0.55rem;
-    letter-spacing: 0.2em;
+  .card-countdown-separator {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
   }
 
   /* Timeline */
