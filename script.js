@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initRSVPForm();
   initScrollAnimations();
+
+  // Musique de fond
+  initBackgroundMusic();
 });
 
 /**
@@ -109,7 +112,6 @@ function initRSVPForm() {
     radio.addEventListener('change', (e) => {
       const isAttending = e.target.value === 'yes';
       plusOneGroup.style.display = isAttending ? 'flex' : 'none';
-      dietGroup.style.display = isAttending ? 'flex' : 'none';
     });
   });
 
@@ -118,8 +120,9 @@ function initRSVPForm() {
 
     const name = form.guestName.value.trim();
     const email = form.guestEmail.value.trim();
+    const phone = form.guestPhone ? form.guestPhone.value.trim() : '';
 
-    if (!name || !email) {
+    if (!name || !email || !phone) {
       statusEl.className = 'form-status error';
       statusEl.textContent = 'Veuillez renseigner les champs requis marqués d\'un astérisque.';
       return;
@@ -133,9 +136,9 @@ function initRSVPForm() {
     const formData = {
       name: name,
       email: email,
+      phone: phone,
       attending: form.attending.value,
       guestCount: form.guestCount ? form.guestCount.value : '0',
-      diet: form.dietRestrictions.value.trim(),
       message: form.guestMessage.value.trim(),
       timestamp: new Date().toISOString()
     };
@@ -429,4 +432,67 @@ function initHouppaTimer() {
 
   updateTimer();
   setInterval(updateTimer, 1000);
+}
+
+/**
+ * Gestion de la musique de fond & du bouton flottant
+ */
+function initBackgroundMusic() {
+  const music = document.getElementById('bgMusic');
+  const toggleBtn = document.getElementById('audioToggle');
+  const label = document.getElementById('audioLabel');
+
+  if (!music || !toggleBtn || !label) return;
+
+  // Réglage du volume (entre 0.0 et 1.0)
+  music.volume = 0.35;
+
+  let isPlaying = false;
+
+  function playAudio() {
+    music.play().then(() => {
+      isPlaying = true;
+      toggleBtn.classList.remove('is-muted');
+      label.textContent = 'COUPER LA MUSIQUE';
+    }).catch(() => {
+      // Autoplay bloqué par les restrictions navigateur en attente d'interaction
+      isPlaying = false;
+      toggleBtn.classList.add('is-muted');
+      label.textContent = 'LANCER LA MUSIQUE';
+    });
+  }
+
+  // Tentative au chargement
+  playAudio();
+
+  // Déclenchement automatique au premier geste utilisateur si le navigateur l'avait bloqué
+  function unlockOnUserAction() {
+    if (!isPlaying) {
+      playAudio();
+    }
+    window.removeEventListener('click', unlockOnUserAction);
+    window.removeEventListener('scroll', unlockOnUserAction);
+    window.removeEventListener('touchstart', unlockOnUserAction);
+  }
+
+  window.addEventListener('click', unlockOnUserAction, { once: true });
+  window.addEventListener('scroll', unlockOnUserAction, { once: true });
+  window.addEventListener('touchstart', unlockOnUserAction, { once: true });
+
+  // Clic manuel sur le bouton
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Évite les conflits avec unlockOnUserAction
+
+    if (music.paused) {
+      music.play();
+      isPlaying = true;
+      toggleBtn.classList.remove('is-muted');
+      label.textContent = 'COUPER LA MUSIQUE';
+    } else {
+      music.pause();
+      isPlaying = false;
+      toggleBtn.classList.add('is-muted');
+      label.textContent = 'LANCER LA MUSIQUE';
+    }
+  });
 }

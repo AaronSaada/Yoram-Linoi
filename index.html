@@ -195,6 +195,11 @@
     </div>
   </section>
 
+  <!-- Interlude Photographique Pleine Largeur -->
+  <div class="fullwidth-photo-break">
+    <img src="images/Maries2.jpg" alt="Yoram & Linoï" class="fullwidth-photo-img">
+  </div>
+
   <!-- Section 2 : Houppa & Soirée -->
   <section class="section ceremony-editorial" id="houppa">
     <div class="ceremony-container">
@@ -262,7 +267,7 @@
         <div class="families-block memorial-names-block">
           <div class="family-column">
             <p class="family-members">M. BERREBI Simon z"l</p>
-            <p class="family-members">Mme BERREBI Rivka z"l</p>
+            <p class="family-members">Mme BENSABAT Rivka z"l</p>
             <p class="family-members">M. HUET Patrick z"l</p>
           </div>
 
@@ -352,18 +357,24 @@
       <div class="section-header">
         <p class="subtitle">Confirmation</p>
         <h2 class="section-title">Réponse Souhaitée</h2>
-        <p class="rsvp-deadline">Merci de confirmer votre présence avant le 15 Mai 2027</p>
+        <p class="rsvp-deadline">Merci de confirmer votre présence le plus tôt possible. (Au plus tard le 15 Mars 2027)</p>
       </div>
 
       <form class="rsvp-form" id="rsvpForm" novalidate>
         <div class="form-group">
           <label for="guestName">Votre Nom & Prénom *</label>
-          <input type="text" id="guestName" name="guestName" required placeholder="Ex: Victoire de Castellane">
+          <input type="text" id="guestName" name="guestName" required placeholder="Ex: Yves SAINT LAURENT">
         </div>
 
         <div class="form-group">
           <label for="guestEmail">Adresse E-mail *</label>
           <input type="email" id="guestEmail" name="guestEmail" required placeholder="contact@domaine.com">
+        </div>
+
+        <!-- Nouveau champ Téléphone -->
+        <div class="form-group">
+          <label for="guestPhone">Numéro de Téléphone *</label>
+          <input type="tel" id="guestPhone" name="guestPhone" required placeholder="+33 6 12 34 56 78">
         </div>
 
         <div class="form-group">
@@ -372,27 +383,32 @@
             <label class="radio-label">
               <input type="radio" name="attending" value="yes" checked>
               <span class="custom-radio"></span>
-              <span>Avec grand honneur</span>
+              <span>Présent(s) !</span>
             </label>
             <label class="radio-label">
               <input type="radio" name="attending" value="no">
               <span class="custom-radio"></span>
-              <span>Avec regret, à distance</span>
+              <span>Pas présent(s)</span>
             </label>
           </div>
         </div>
 
         <div class="form-group" id="plusOneGroup">
           <label for="guestCount">Nombre d'invités confirmés</label>
-          <select id="guestCount" name="guestCount">
-            <option value="1">1 personne</option>
-            <option value="2">2 personnes (avec accompagnant)</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="dietGroup">
-          <label for="dietRestrictions">Régimes particuliers / Allergies</label>
-          <input type="text" id="dietRestrictions" name="dietRestrictions" placeholder="Végétarien, sans gluten, casher...">
+          <div class="select-wrapper">
+            <select id="guestCount" name="guestCount">
+              <option value="1">1 personne</option>
+              <option value="2">2 personnes</option>
+              <option value="3">3 personnes</option>
+              <option value="4">4 personnes</option>
+              <option value="5">5 personnes</option>
+              <option value="6">6 personnes</option>
+              <option value="7">7 personnes</option>
+              <option value="8">8 personnes</option>
+              <option value="9">9 personnes</option>
+              <option value="10">10 personnes</option>
+            </select>
+          </div>
         </div>
 
         <div class="form-group">
@@ -416,8 +432,25 @@
     </div>
     <p class="footer-names">YORAM & LINOÏ</p>
     <p class="footer-date">07 . 07 . 2027 — PARIS</p>
-    <div class="footer-credits">Célébration Privée — Tous droits réservés</div>
+    <div class="footer-credits">Yoram & Linoï — Tous droits réservés</div>
   </footer>
+  <!-- Fond Musical & Contrôle Flottant -->
+  <!-- <audio id="bgMusic" loop preload="auto">
+    <source src="audio/musique.mp3" type="audio/mpeg">
+  </audio> -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://music.youtube.com/watch?v=f2dwSG1x984" type="audio/mpeg">
+  </audio>
+
+  <button class="audio-toggle" id="audioToggle" aria-label="Couper la musique">
+    <span class="audio-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span class="audio-label" id="audioLabel">COUPER LA MUSIQUE</span>
+  </button>
 
   <script src="script.js"></script>
 </body>
