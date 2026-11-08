@@ -1021,31 +1021,26 @@ body {
 
 .hebrew-arc-text {
   font-family: 'Bellefair', 'Frank Ruhl Libre', serif;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 400;
   fill: var(--text-main);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
-.invitation-main-title {
-  font-family: var(--font-title);
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-main);
-  margin: 1rem 0 2rem;
-}
-
-/* Familles en Flex Row */
 .families-block {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: stretch; /* Permet au séparateur d'épouser la hauteur du contenu */
   gap: 2.5rem;
   width: 100%;
   margin-bottom: 2rem;
+}
+
+.family-divider {
+  width: 1px;
+  background-color: var(--border-light);
+  align-self: stretch; /* S'adapte dynamiquement si une colonne est plus haute */
 }
 
 .family-column {
@@ -1056,10 +1051,13 @@ body {
 }
 
 .family-role {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.25rem;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--accent-gold);
+  margin-bottom: 0.5rem;
 }
 
 .family-members {
@@ -1079,11 +1077,32 @@ body {
 }
 
 .invitation-intro-phrase {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.05rem;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 2rem;
+  margin: 0 0 2.4rem;
+  line-height: 1.8;
+}
+
+/* Phrase d'hommage */
+.invitation-memorial-phrase {
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 1.6rem auto 1.2rem; /* Marge inférieure réduite pour rapprocher les noms */
+}
+
+/* Bloc des proches disparus */
+.memorial-names-block {
+  margin-bottom: 2.8rem;
 }
 
 /* Mariés en Flex Row */
@@ -1103,6 +1122,7 @@ body {
   gap: 0.3rem;
 }
 
+/* Noms et prénoms : conservés en sérif italique Cormorant Garamond */
 .spouse-name {
   font-family: var(--font-serif);
   font-style: italic;
@@ -1148,12 +1168,15 @@ body {
   color: var(--text-main);
 }
 
+/* Horaire : passe en Syncopate */
 .invitation-time {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  margin-top: 0.3rem;
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.8rem;
+  line-height: 1.1;
 }
 
 .invitation-venue {
