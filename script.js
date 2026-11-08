@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCountdown();
+  initEditorialCarousel(); // Ajout ici
   initRSVPForm();
   initScrollAnimations();
 });
@@ -173,4 +174,128 @@ function initScrollAnimations() {
   });
 
   elementsToAnimate.forEach(el => observer.observe(el));
+}
+
+/**
+ * Carrousel Infini avec glissement fluide (Inertie & Lerp)
+ */
+function initEditorialCarousel() {
+  const carousel = document.getElementById('editorialCarousel');
+  const track = document.getElementById('carouselTrack');
+  if (!carousel || !track) return;
+
+  const initialSlides = Array.from(track.children);
+  if (initialSlides.length === 0) return;
+
+  // Cloner deux fois le lot d'origine pour obtenir 3 jeux continus [Set A, Set B, Set C]
+  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+
+  let singleSetWidth = 0;
+
+  function updateSetWidth() {
+    singleSetWidth = track.scrollWidth / 3;
+  }
+
+  updateSetWidth();
+  window.addEventListener('resize', updateSetWidth);
+  window.addEventListener('load', updateSetWidth);
+
+  // Positionnement au centre (sur le deuxième jeu)
+  let currentX = -singleSetWidth;
+  let targetX = -singleSetWidth;
+
+  // Variables de glissement
+  let isDragging = false;
+  let lastX = 0;
+  let velocity = 0;
+
+  // Événements Souris
+  carousel.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    lastX = e.clientX;
+    velocity = 0;
+    carousel.classList.add('is-dragging');
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const delta = e.clientX - lastX;
+    lastX = e.clientX;
+    targetX += delta;
+    velocity = delta;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.classList.remove('is-dragging');
+    // Amortissement de relance douce au relâchement
+    targetX += velocity * 3.5;
+  });
+
+  // Événements Tactiles (Mobile)
+  carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    lastX = e.touches[0].clientX;
+    velocity = 0;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || !e.touches[0]) return;
+    const currentTouchX = e.touches[0].clientX;
+    const delta = currentTouchX - lastX;
+    lastX = currentTouchX;
+    targetX += delta;
+    velocity = delta;
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    targetX += velocity * 3.5;
+  });
+  // Gestion du Pad Tactile (Swipe à 2 doigts sur le côté & Shift + Molette)
+  carousel.addEventListener('wheel', (e) => {
+    const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    const isShiftScroll = e.shiftKey && e.deltaY !== 0;
+
+    if (isHorizontalSwipe || isShiftScroll) {
+      e.preventDefault(); // Empêche l'historique du navigateur de reculer/avancer
+      const delta = isHorizontalSwipe ? e.deltaX : e.deltaY;
+
+      // Application du déplacement et impulsion d'inertie
+      targetX -= delta * 1.1;
+      velocity = -delta * 0.35;
+    }
+  }, { passive: false });
+
+  // Boucle d'animation fluide
+  function animate() {
+    if (singleSetWidth > 0) {
+      // Décroissance naturelle de la vélocité après relâchement
+      if (!isDragging && Math.abs(velocity) > 0.05) {
+        velocity *= 0.92;
+        targetX += velocity;
+      }
+
+      // Interpolation linéaire (effet feutré / fluide)
+      currentX += (targetX - currentX) * 0.08;
+
+      // Boucle infinie invisible : recentrage instantané dès franchissement des seuils
+      if (currentX > -0.2 * singleSetWidth) {
+        currentX -= singleSetWidth;
+        targetX -= singleSetWidth;
+      } else if (currentX < -1.8 * singleSetWidth) {
+        currentX += singleSetWidth;
+        targetX += singleSetWidth;
+      }
+
+      track.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(animate);
 }

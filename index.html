@@ -6,16 +6,13 @@
   <title>Yoram & Linoï — Célébration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- Navigation Flottante -->
   <header class="navbar" id="navbar">
-    <a href="#hero" class="nav-brand" aria-label="Accueil">
-      <img src="images/Logo.png" alt="Logo" class="nav-logo">
-    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Menu de navigation">
       <span></span>
       <span></span>
@@ -71,20 +68,39 @@
   </section>
 
   <!-- Édito / Invitation -->
+  <!-- Édito / Invitation -->
   <section class="section edito" id="edito">
     <div class="container-narrow">
       <p class="subtitle">L'Édition</p>
-      <h2 class="title-editorial">Deux regards, une signature</h2>
+      <h2 class="title-editorial">Deux vies, une union</h2>
       <div class="editorial-body">
-        <p>
-          Comme deux lignes pures qui se rencontrent pour définir une silhouette intemporelle,
-          nous avons l'immense bonheur de vous convier à la célébration de notre union.
-        </p>
         <p>
           En présence de ceux qui nous sont les plus chers, nous scellerons notre engagement
           autour d'une soirée pensée sous le signe de l'élégance, de l'émotion et de la fête.
         </p>
       </div>
+
+      <!-- CARROUSEL ÉDITORIAL INFINI (DRAG & DROP) -->
+      <div class="editorial-carousel" id="editorialCarousel" aria-label="Galerie de photographies">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide crop-bars">
+            <img src="images/Photo1.jpeg" alt="Yoram & Linoï" draggable="false">
+          </div>
+          <div class="carousel-slide crop-bars">
+            <img src="images/Photo3.jpeg" alt="Yoram & Linoï" draggable="false">
+          </div>
+          <div class="carousel-slide crop-bars">
+            <img src="images/Photo4.jpeg" alt="Yoram & Linoï" draggable="false">
+          </div>
+          <div class="carousel-slide crop-bars">
+            <img src="images/Photo2.jpeg" alt="Yoram & Linoï" draggable="false">
+          </div>
+          <div class="carousel-slide crop-bars">
+            <img src="images/Photo5.jpg" alt="Yoram & Linoï" draggable="false">
+          </div>
+        </div>
+      </div>
+
       <div class="editorial-signature">
         <img src="images/Logo.png" alt="Signature" class="editorial-logo">
       </div>
