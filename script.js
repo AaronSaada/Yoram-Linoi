@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCountdown();
   initEditorialCarousel();
-  
+
   // Mairie
   initMairieSlideshow();
   initMairieTimer();
@@ -33,7 +33,7 @@ function initNavbar() {
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  navLinks.forEach(link => {
+  navLinks.forEach((link) => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('active');
       navToggle.classList.remove('open');
@@ -42,6 +42,7 @@ function initNavbar() {
     });
   });
 }
+
 /**
  * 2. Décomptes intégrés aux cartes (Mairie à 14h00 & Houppa à 17h30)
  */
@@ -53,14 +54,14 @@ function initCountdown() {
     days: document.getElementById('mairie-days'),
     hours: document.getElementById('mairie-hours'),
     minutes: document.getElementById('mairie-minutes'),
-    seconds: document.getElementById('mairie-seconds')
+    seconds: document.getElementById('mairie-seconds'),
   };
 
   const houppaEls = {
     days: document.getElementById('houppa-days'),
     hours: document.getElementById('houppa-hours'),
     minutes: document.getElementById('houppa-minutes'),
-    seconds: document.getElementById('houppa-seconds')
+    seconds: document.getElementById('houppa-seconds'),
   };
 
   function updateCardTimer(targetDate, elements) {
@@ -78,7 +79,9 @@ function initCountdown() {
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -108,7 +111,7 @@ function initRSVPForm() {
   const plusOneGroup = document.getElementById('plusOneGroup');
   const dietGroup = document.getElementById('dietGroup');
 
-  Array.from(attendingRadios).forEach(radio => {
+  Array.from(attendingRadios).forEach((radio) => {
     radio.addEventListener('change', (e) => {
       const isAttending = e.target.value === 'yes';
       plusOneGroup.style.display = isAttending ? 'flex' : 'none';
@@ -124,7 +127,8 @@ function initRSVPForm() {
 
     if (!name || !email || !phone) {
       statusEl.className = 'form-status error';
-      statusEl.textContent = 'Veuillez renseigner les champs requis marqués d\'un astérisque.';
+      statusEl.textContent =
+        "Veuillez renseigner les champs requis marqués d'un astérisque.";
       return;
     }
 
@@ -140,22 +144,24 @@ function initRSVPForm() {
       attending: form.attending.value,
       guestCount: form.guestCount ? form.guestCount.value : '0',
       message: form.guestMessage.value.trim(),
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1200));
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       console.log('Données RSVP :', formData);
 
       statusEl.className = 'form-status success';
-      statusEl.textContent = 'Votre confirmation a bien été enregistrée. Merci pour votre délicatesse.';
+      statusEl.textContent =
+        'Votre confirmation a bien été enregistrée. Merci pour votre délicatesse.';
       form.reset();
 
       plusOneGroup.style.display = 'flex';
       dietGroup.style.display = 'flex';
     } catch (err) {
       statusEl.className = 'form-status error';
-      statusEl.textContent = 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer ultérieurement.';
+      statusEl.textContent =
+        "Une erreur est survenue lors de l'envoi. Veuillez réessayer ultérieurement.";
     } finally {
       submitBtn.disabled = false;
       submitBtn.querySelector('span').textContent = initialText;
@@ -171,21 +177,24 @@ function initScrollAnimations() {
     '.event-card-single, .editorial-body, .card-countdown'
   );
 
-  elementsToAnimate.forEach(el => el.classList.add('reveal-init'));
+  elementsToAnimate.forEach((el) => el.classList.add('reveal-init'));
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-active');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -40px 0px'
-  });
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px',
+    }
+  );
 
-  elementsToAnimate.forEach(el => observer.observe(el));
+  elementsToAnimate.forEach((el) => observer.observe(el));
 }
 
 /**
@@ -200,8 +209,8 @@ function initEditorialCarousel() {
   if (initialSlides.length === 0) return;
 
   // Cloner deux fois le lot d'origine pour obtenir 3 jeux continus [Set A, Set B, Set C]
-  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
-  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+  initialSlides.forEach((slide) => track.appendChild(slide.cloneNode(true)));
+  initialSlides.forEach((slide) => track.appendChild(slide.cloneNode(true)));
 
   let singleSetWidth = 0;
 
@@ -247,40 +256,53 @@ function initEditorialCarousel() {
   });
 
   // Événements Tactiles (Mobile)
-  carousel.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    lastX = e.touches[0].clientX;
-    velocity = 0;
-  }, { passive: true });
+  carousel.addEventListener(
+    'touchstart',
+    (e) => {
+      isDragging = true;
+      lastX = e.touches[0].clientX;
+      velocity = 0;
+    },
+    { passive: true }
+  );
 
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging || !e.touches[0]) return;
-    const currentTouchX = e.touches[0].clientX;
-    const delta = currentTouchX - lastX;
-    lastX = currentTouchX;
-    targetX += delta;
-    velocity = delta;
-  }, { passive: true });
+  window.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!isDragging || !e.touches[0]) return;
+      const currentTouchX = e.touches[0].clientX;
+      const delta = currentTouchX - lastX;
+      lastX = currentTouchX;
+      targetX += delta;
+      velocity = delta;
+    },
+    { passive: true }
+  );
 
   window.addEventListener('touchend', () => {
     if (!isDragging) return;
     isDragging = false;
     targetX += velocity * 3.5;
   });
+
   // Gestion du Pad Tactile (Swipe à 2 doigts sur le côté & Shift + Molette)
-  carousel.addEventListener('wheel', (e) => {
-    const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-    const isShiftScroll = e.shiftKey && e.deltaY !== 0;
+  carousel.addEventListener(
+    'wheel',
+    (e) => {
+      const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      const isShiftScroll = e.shiftKey && e.deltaY !== 0;
 
-    if (isHorizontalSwipe || isShiftScroll) {
-      e.preventDefault(); // Empêche l'historique du navigateur de reculer/avancer
-      const delta = isHorizontalSwipe ? e.deltaX : e.deltaY;
+      if (isHorizontalSwipe || isShiftScroll) {
+        e.preventDefault(); // Empêche l'historique du navigateur de reculer/avancer
+        const delta = isHorizontalSwipe ? e.deltaX : e.deltaY;
 
-      // Application du déplacement et impulsion d'inertie
-      targetX -= delta * 1.1;
-      velocity = -delta * 0.35;
-    }
-  }, { passive: false });
+        // Application du déplacement et impulsion d'inertie
+        targetX -= delta * 1.1;
+        velocity = -delta * 0.35;
+      }
+    },
+    { passive: false }
+  );
 
   // Boucle d'animation fluide
   function animate() {
@@ -323,7 +345,7 @@ function initMairieSlideshow() {
   if (slides.length <= 1) return;
 
   let currentIndex = 0;
-  const slideDuration = 4500; // 4 secondes d'affichage
+  const slideDuration = 4500;
 
   setInterval(() => {
     slides[currentIndex].classList.remove('is-active');
@@ -343,8 +365,6 @@ function initMairieTimer() {
 
   if (!daysEl || !hoursEl || !minEl || !secEl) return;
 
-  // Définir la date cible exacte : Année, Mois (0 = Janvier ... 9 = Octobre), Jour, Heure, Minute
-  // Exemple ci-dessous pour le 15 Octobre 2027 à 14h30 :
   const targetDate = new Date(2027, 5, 30, 14, 30, 0).getTime();
 
   function updateTimer() {
@@ -360,7 +380,9 @@ function initMairieTimer() {
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -420,7 +442,9 @@ function initHouppaTimer() {
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -444,55 +468,54 @@ function initBackgroundMusic() {
 
   if (!music || !toggleBtn || !label) return;
 
-  // Réglage du volume (entre 0.0 et 1.0)
   music.volume = 0.35;
 
-  let isPlaying = false;
+  function setPlayingState() {
+    toggleBtn.classList.remove('is-muted');
+    label.textContent = 'COUPER LA MUSIQUE';
+  }
 
-  function playAudio() {
-    music.play().then(() => {
-      isPlaying = true;
-      toggleBtn.classList.remove('is-muted');
-      label.textContent = 'COUPER LA MUSIQUE';
-    }).catch(() => {
-      // Autoplay bloqué par les restrictions navigateur en attente d'interaction
-      isPlaying = false;
-      toggleBtn.classList.add('is-muted');
-      label.textContent = 'LANCER LA MUSIQUE';
+  function setMutedState() {
+    toggleBtn.classList.add('is-muted');
+    label.textContent = 'ACTIVER LA MUSIQUE';
+  }
+
+  // 1. Tentative de lecture immédiate
+  music
+    .play()
+    .then(setPlayingState)
+    .catch(() => {
+      // Autoplay bloqué : activation au tout premier contact
+      setMutedState();
+
+      function unlockAudio() {
+        music
+          .play()
+          .then(() => {
+            setPlayingState();
+          })
+          .catch(() => {});
+
+        document.removeEventListener('pointerdown', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('click', unlockAudio);
+      }
+
+      document.addEventListener('pointerdown', unlockAudio, { once: true });
+      document.addEventListener('touchstart', unlockAudio, { once: true });
+      document.addEventListener('click', unlockAudio, { once: true });
     });
-  }
 
-  // Tentative au chargement
-  playAudio();
-
-  // Déclenchement automatique au premier geste utilisateur si le navigateur l'avait bloqué
-  function unlockOnUserAction() {
-    if (!isPlaying) {
-      playAudio();
-    }
-    window.removeEventListener('click', unlockOnUserAction);
-    window.removeEventListener('scroll', unlockOnUserAction);
-    window.removeEventListener('touchstart', unlockOnUserAction);
-  }
-
-  window.addEventListener('click', unlockOnUserAction, { once: true });
-  window.addEventListener('scroll', unlockOnUserAction, { once: true });
-  window.addEventListener('touchstart', unlockOnUserAction, { once: true });
-
-  // Clic manuel sur le bouton
+  // 2. Clic manuel sur le bouton flottant
   toggleBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Évite les conflits avec unlockOnUserAction
+    e.stopPropagation();
 
     if (music.paused) {
       music.play();
-      isPlaying = true;
-      toggleBtn.classList.remove('is-muted');
-      label.textContent = 'COUPER LA MUSIQUE';
+      setPlayingState();
     } else {
       music.pause();
-      isPlaying = false;
-      toggleBtn.classList.add('is-muted');
-      label.textContent = 'LANCER LA MUSIQUE';
+      setMutedState();
     }
   });
 }
