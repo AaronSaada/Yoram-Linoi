@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCountdown();
-  initEditorialCarousel(); // Ajout ici
+  initEditorialCarousel();
+  initMairieSlideshow(); // Ajout ici
   initRSVPForm();
   initScrollAnimations();
 });
@@ -298,4 +299,24 @@ function initEditorialCarousel() {
   }
 
   requestAnimationFrame(animate);
+}
+
+/**
+ * Diaporama Mairie avec transition douce et animation de zoom
+ */
+function initMairieSlideshow() {
+  const slideshow = document.getElementById('mairieSlideshow');
+  if (!slideshow) return;
+
+  const slides = slideshow.querySelectorAll('.ceremony-slide');
+  if (slides.length <= 1) return;
+
+  let currentIndex = 0;
+  const slideDuration = 4500; // 4 secondes d'affichage
+
+  setInterval(() => {
+    slides[currentIndex].classList.remove('is-active');
+    currentIndex = (currentIndex + 1) % slides.length;
+    slides[currentIndex].classList.add('is-active');
+  }, slideDuration);
 }
