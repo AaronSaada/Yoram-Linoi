@@ -528,10 +528,68 @@ body {
 /* ==========================================================================
    Mairie Éditoriale (Format 60vh & Ombre Noire Intégrée)
    ========================================================================== */
+/* Déverrouillage de la hauteur pour laisser respirer le contenu */
 .ceremony-editorial {
-  padding: 5rem 0;
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+  padding: 6rem 0 7rem; /* Marges confortables au-dessus et en dessous */
   display: flex;
   justify-content: center;
+}
+
+/* Grille d'informations sous l'image */
+.ceremony-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 2.8rem;
+  padding-top: 2.4rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.meta-label {
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.meta-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.meta-text strong {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.meta-text em {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.ceremony-meta-grid {
+  /* S'assurer que le bloc n'est pas masqué */
+  position: relative;
+  z-index: 5;
+}
+
+.meta-text {
+  color: var(--text-main, #141414); /* ou #ffffff si fond noir */
 }
 
 .ceremony-container {
@@ -629,6 +687,113 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
+
+/* ==========================================================================
+   Détails Cérémonie & Timer Éditorial
+   ========================================================================== */
+.ceremony-details {
+  width: 100%;
+  margin-top: 3.5rem;
+  position: relative;
+  z-index: 5;
+}
+
+/* Bloc Date & Horaires (Pleine largeur & plus gros) */
+.ceremony-date-feature {
+  width: 100%;
+  padding-bottom: 2.8rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Taille de la date réduite et équilibrée */
+.ceremony-date-heading {
+  font-family: var(--font-title);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+/* Centrage parfait du timer */
+.ceremony-timer {
+  display: flex;
+  align-items: baseline;
+  justify-content: center; /* Centre horizontalement les blocs */
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  margin: 2.2rem auto 0;
+  width: 100%;
+}
+
+.timer-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Centre les chiffres avec leur label */
+  text-align: center;
+}
+
+.timer-num {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-tag {
+  font-family: var(--font-title);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.45rem;
+}
+
+.timer-divider {
+  font-family: var(--font-title);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 300;
+  color: var(--border-light);
+  transform: translateY(-0.25rem);
+  user-select: none;
+}
+
+/* Grille inférieure (Accès & Précisions) */
+.ceremony-sub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  padding-top: 2.8rem;
+}
+
+.meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.meta-label {
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.meta-text {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-main);
+  margin: 0;
 }
 
 /* Titre du lieu en gros et gras */
@@ -882,22 +1047,6 @@ body {
   letter-spacing: 0.03em;
   color: var(--text-muted);
   line-height: 1.7;
-}
-
-@media screen and (max-width: 768px) {
-  .event-card-single {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .families-block {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .family-divider {
-    width: 60px;
-    height: 1px;
-  }
 }
 
 /* ==========================================================================
@@ -1232,8 +1381,43 @@ body {
     line-height: 1.9;
   }
 
+  .ceremony-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    margin-top: 2rem;
+    padding-top: 1.8rem;
+  }
+
   .ceremony-editorial {
     padding: 3.5rem 0;
+  }
+
+  .ceremony-details {
+    margin-top: 2.5rem;
+  }
+
+  .ceremony-timer {
+    gap: 0.8rem;
+  }
+
+  .ceremony-sub-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+
+  .event-card-single {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .families-block {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .family-divider {
+    width: 60px;
+    height: 1px;
   }
 
   .ceremony-poster-frame {

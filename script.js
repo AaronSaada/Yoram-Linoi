@@ -2,7 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCountdown();
   initEditorialCarousel();
-  initMairieSlideshow(); // Ajout ici
+  
+  // Mairie
+  initMairieSlideshow();
+  initMairieTimer();
+
+  // Houppa
+  initHouppaSlideshow();
+  initHouppaTimer();
+
   initRSVPForm();
   initScrollAnimations();
 });
@@ -319,4 +327,106 @@ function initMairieSlideshow() {
     currentIndex = (currentIndex + 1) % slides.length;
     slides[currentIndex].classList.add('is-active');
   }, slideDuration);
+}
+
+/**
+ * Compte à rebours Mairie fiabilisé
+ */
+function initMairieTimer() {
+  const daysEl = document.getElementById('timer-days');
+  const hoursEl = document.getElementById('timer-hours');
+  const minEl = document.getElementById('timer-minutes');
+  const secEl = document.getElementById('timer-seconds');
+
+  if (!daysEl || !hoursEl || !minEl || !secEl) return;
+
+  // Définir la date cible exacte : Année, Mois (0 = Janvier ... 9 = Octobre), Jour, Heure, Minute
+  // Exemple ci-dessous pour le 15 Octobre 2027 à 14h30 :
+  const targetDate = new Date(2027, 5, 30, 14, 30, 0).getTime();
+
+  function updateTimer() {
+    const now = Date.now();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minEl.textContent = '00';
+      secEl.textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minEl.textContent = String(minutes).padStart(2, '0');
+    secEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+/**
+ * Diaporama Houppa (Cycle 4500ms, zoom linéaire et fondu flou)
+ */
+function initHouppaSlideshow() {
+  const slideshow = document.getElementById('houppaSlideshow');
+  if (!slideshow) return;
+
+  const slides = slideshow.querySelectorAll('.ceremony-slide');
+  if (slides.length <= 1) return;
+
+  let currentIndex = 0;
+  const slideDuration = 4500;
+
+  setInterval(() => {
+    slides[currentIndex].classList.remove('is-active');
+    currentIndex = (currentIndex + 1) % slides.length;
+    slides[currentIndex].classList.add('is-active');
+  }, slideDuration);
+}
+
+/**
+ * Compte à rebours Houppa
+ */
+function initHouppaTimer() {
+  const daysEl = document.getElementById('houppa-timer-days');
+  const hoursEl = document.getElementById('houppa-timer-hours');
+  const minEl = document.getElementById('houppa-timer-minutes');
+  const secEl = document.getElementById('houppa-timer-seconds');
+
+  if (!daysEl || !hoursEl || !minEl || !secEl) return;
+
+  const targetDate = new Date(2027, 6, 7, 18, 30, 0).getTime();
+
+  function updateTimer() {
+    const now = Date.now();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      daysEl.textContent = '00';
+      hoursEl.textContent = '00';
+      minEl.textContent = '00';
+      secEl.textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minEl.textContent = String(minutes).padStart(2, '0');
+    secEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
 }
