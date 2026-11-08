@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoram & Linoï — Célébration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Flottante -->
+  <header class="navbar" id="navbar">
+    <a href="#hero" class="nav-brand" aria-label="Accueil">
+      <img src="images/Logo.png" alt="Logo" class="nav-logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu de navigation">
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav-links" id="navMenu">
+      <a href="#hero">Accueil</a>
+      <a href="#edito">L'Invitation</a>
+      <a href="#programme">Programme</a>
+      <a href="#lieux">Lieux</a>
+      <a href="#rsvp" class="nav-cta">RSVP</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <!-- Filigrane géant -->
+    <div class="hero-watermark" aria-hidden="true">
+      <img src="images/Logo.png" alt="" class="hero-watermark-img">
+    </div>
+
+    <!-- Noms des mariés et nom de famille -->
+    <div class="hero-content">
+        
+        <div class="names-row">
+            
+            <div class="groom-block">
+                <h1 class="couple-name" aria-label="YORAM">
+                    <span>Y</span><span>O</span><span>R</span><span>A</span><span>M</span>
+                </h1>
+            </div>
+
+            <div class="bride-block">
+                <h1 class="couple-name" aria-label="LINOÏ">
+                    <span>L</span><span>I</span><span>N</span><span>O</span><span>Ï</span>
+                </h1>
+            </div>
+        </div>
+        <div class="family-name-block">
+            <span class="family-name">SAADA</span>
+        </div>
+      
+    </div>
+
+    <!-- Détails inférieurs -->
+    <div class="hero-footer">
+      <p class="wedding-date">07 · JUILLET · 2027</p>
+      <p class="wedding-place">PARIS, FRANCE</p>
+      <a href="#edito" class="scroll-indicator" aria-label="Défiler vers l'invitation">
+        <span class="scroll-text">DÉCOUVRIR</span>
+        <div class="scroll-hairline"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Édito / Invitation -->
+  <section class="section edito" id="edito">
+    <div class="container-narrow">
+      <p class="subtitle">L'Édition</p>
+      <h2 class="title-editorial">Deux regards, une signature</h2>
+      <div class="editorial-body">
+        <p>
+          Comme deux lignes pures qui se rencontrent pour définir une silhouette intemporelle,
+          nous avons l'immense bonheur de vous convier à la célébration de notre union.
+        </p>
+        <p>
+          En présence de ceux qui nous sont les plus chers, nous scellerons notre engagement
+          autour d'une soirée pensée sous le signe de l'élégance, de l'émotion et de la fête.
+        </p>
+      </div>
+      <div class="editorial-signature">
+        <img src="images/Logo.png" alt="Signature" class="editorial-logo">
+      </div>
+    </div>
+  </section>
+
+  <!-- Compte à Rebours -->
+  <section class="section countdown-section">
+    <div class="container">
+      <div class="countdown-grid" id="countdown">
+        <div class="countdown-item">
+          <span class="countdown-number" id="days">000</span>
+          <span class="countdown-label">Jours</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="hours">00</span>
+          <span class="countdown-label">Heures</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="minutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <span class="countdown-number" id="seconds">00</span>
+          <span class="countdown-label">Secondes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programme -->
+  <section class="section programme" id="programme">
+    <div class="container">
+      <div class="section-header">
+        <p class="subtitle">La Chronique</p>
+        <h2 class="section-title">L'Ordre du Jour</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-entry">
+          <div class="timeline-time">15 : 30</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-details">
+            <h3 class="event-title">Cérémonie Solennelle</h3>
+            <p class="event-desc">L'échange des vœux et la bénédiction des alliances.</p>
+          </div>
+        </article>
+
+        <article class="timeline-entry">
+          <div class="timeline-time">17 : 30</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-details">
+            <h3 class="event-title">Cocktail & Champagne</h3>
+            <p class="event-desc">Coupes de bienvenue et créations gastronomiques dans la cour d'honneur.</p>
+          </div>
+        </article>
+
+        <article class="timeline-entry">
+          <div class="timeline-time">20 : 00</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-details">
+            <h3 class="event-title">Le Dîner d'Honneur</h3>
+            <p class="event-desc">Un menu d'exception rythmé par les discours et les attentions.</p>
+          </div>
+        </article>
+
+        <article class="timeline-entry">
+          <div class="timeline-time">23 : 30</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-details">
+            <h3 class="event-title">Ouverture de Nuit</h3>
+            <p class="event-desc">Célébration dansante jusqu'au lever du jour.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lieux & Accès -->
+  <section class="section lieux" id="lieux">
+    <div class="container">
+      <div class="section-header">
+        <p class="subtitle">Adresses</p>
+        <h2 class="section-title">Les Écrins du Jour J</h2>
+      </div>
+
+      <div class="places-grid">
+        <div class="place-card">
+          <span class="place-badge">Cérémonie</span>
+          <h3 class="place-name">Hôtel Salomon de Rothschild</h3>
+          <p class="place-address">11 Rue Berryer, 75008 Paris</p>
+          <p class="place-info">Un hôtel particulier néo-classique au cœur du 8e arrondissement.</p>
+          <div class="place-actions">
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="link-action">Google Maps</a>
+            <span class="link-separator">/</span>
+            <a href="https://waze.com" target="_blank" rel="noopener" class="link-action">Waze</a>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <span class="place-badge">Réception & Soirée</span>
+          <h3 class="place-name">Pavillon Cambon Capucines</h3>
+          <p class="place-address">46 Rue Cambon, 75001 Paris</p>
+          <p class="place-info">Dans l'épicentre de la haute couture parisienne et de la rue mythique.</p>
+          <div class="place-actions">
+            <a href="https://maps.google.com" target="_blank" rel="noopener" class="link-action">Google Maps</a>
+            <span class="link-separator">/</span>
+            <a href="https://waze.com" target="_blank" rel="noopener" class="link-action">Waze</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulaire RSVP -->
+  <section class="section rsvp" id="rsvp">
+    <div class="container-narrow">
+      <div class="section-header">
+        <p class="subtitle">Confirmation</p>
+        <h2 class="section-title">Réponse Souhaitée</h2>
+        <p class="rsvp-deadline">Merci de confirmer votre présence avant le 15 Mai 2027</p>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm" novalidate>
+        <div class="form-group">
+          <label for="guestName">Votre Nom & Prénom *</label>
+          <input type="text" id="guestName" name="guestName" required placeholder="Ex: Victoire de Castellane">
+        </div>
+
+        <div class="form-group">
+          <label for="guestEmail">Adresse E-mail *</label>
+          <input type="email" id="guestEmail" name="guestEmail" required placeholder="contact@domaine.com">
+        </div>
+
+        <div class="form-group">
+          <label class="group-label">Serez-vous parmi nous ? *</label>
+          <div class="radio-options">
+            <label class="radio-label">
+              <input type="radio" name="attending" value="yes" checked>
+              <span class="custom-radio"></span>
+              <span>Avec grand honneur</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="attending" value="no">
+              <span class="custom-radio"></span>
+              <span>Avec regret, à distance</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="plusOneGroup">
+          <label for="guestCount">Nombre d'invités confirmés</label>
+          <select id="guestCount" name="guestCount">
+            <option value="1">1 personne</option>
+            <option value="2">2 personnes (avec accompagnant)</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="dietGroup">
+          <label for="dietRestrictions">Régimes particuliers / Allergies</label>
+          <input type="text" id="dietRestrictions" name="dietRestrictions" placeholder="Végétarien, sans gluten, casher...">
+        </div>
+
+        <div class="form-group">
+          <label for="guestMessage">Un mot pour Yoram & Linoï</label>
+          <textarea id="guestMessage" name="guestMessage" rows="3" placeholder="Écrire un message..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span>Confirmer ma réponse</span>
+        </button>
+
+        <div class="form-status" id="formStatus" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Pied de Page -->
+  <footer class="footer">
+    <div class="footer-logo-container">
+      <img src="images/Logo.png" alt="Logo" class="footer-logo">
+    </div>
+    <p class="footer-names">YORAM & LINOÏ</p>
+    <p class="footer-date">07 . 07 . 2027 — PARIS</p>
+    <div class="footer-credits">Célébration Privée — Tous droits réservés</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1005 @@
+/* ==========================================================================
+   1. Variables & Reset
+   ========================================================================== */
+:root {
+  --bg-primary: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --text-main: #141414;
+  --text-muted: #736F6A;
+  --accent-gold: #C5A880;
+  --accent-pink: #ecbcbc;
+  --border-light: #E5E0D8;
+  --border-dark: #141414;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.3s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--bg-primary);
+  background-image: 
+    linear-gradient(rgba(250, 248, 245, 0.62), rgba(250, 248, 245, 0.62)),
+    url('images/Marble.jpg');
+  background-position: center left;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   2. Typographie & Utilitaires
+   ========================================================================== */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.container-narrow {
+  width: 88%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+
+.section {
+  padding: 8rem 0;
+  position: relative;
+}
+
+/* ==========================================================================
+   3. Navigation Flottante & Logo Nav
+   ========================================================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.8rem 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: padding var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.navbar.scrolled {
+  padding: 1rem 4%;
+  background-color: rgba(250, 248, 245, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-main);
+  transition: width var(--transition-fast);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-cta {
+  border: 1px solid var(--text-main);
+  padding: 0.6rem 1.4rem;
+}
+
+.nav-cta::after {
+  display: none !important;
+}
+
+.nav-cta:hover {
+  background-color: var(--text-main);
+  color: #FFFFFF !important;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 1px;
+  background-color: var(--text-main);
+  transition: transform var(--transition-fast);
+}
+
+/* ==========================================================================
+   4. Hero Section, Filigrane & Noms Équilibrés
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rem 4% 3rem;
+  overflow: hidden;
+}
+
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48vh;
+  max-width: 420px;
+  height: auto;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-watermark-img {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.groom-block,
+.bride-block {
+  flex: 1;
+  display: flex;
+  max-width: 390px;
+  width: 100%;
+}
+
+.groom-block {
+  justify-content: flex-end;
+}
+
+.bride-block {
+  justify-content: flex-start;
+}
+
+.couple-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 6.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+.couple-name span {
+  display: inline-block;
+  text-align: center;
+}
+
+.names-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: clamp(2rem, 5vw, 6rem);
+}
+
+.family-name-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.family-name {
+  font-family: var(--font-serif);
+  font-size: clamp(3.1rem, 1.6vw, 1.6rem);
+  font-weight: 400;
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--accent-pink);
+  padding-left: 0.6em; /* Équilibre le letter-spacing */
+}
+
+.hero-footer {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wedding-date {
+  font-size: 0.85rem;
+  letter-spacing: 0.35em;
+  font-weight: 400;
+}
+
+.wedding-place {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--text-muted);
+}
+
+.scroll-indicator {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.scroll-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.scroll-hairline {
+  width: 1px;
+  height: 35px;
+  background-color: var(--text-main);
+  animation: pulseHeight 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseHeight {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   5. Édito / Invitation & Signature
+   ========================================================================== */
+.edito {
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.title-editorial {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+}
+
+.editorial-body {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 2;
+  color: #333333;
+  margin-bottom: 2.5rem;
+}
+
+.editorial-body p {
+  margin-bottom: 1.5rem;
+}
+
+.editorial-signature {
+  display: flex;
+  justify-content: center;
+}
+
+.editorial-logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.75;
+}
+
+/* ==========================================================================
+   6. Compte à Rebours
+   ========================================================================== */
+.countdown-section {
+  padding: 4rem 0;
+  background-color: rgba(244, 241, 234, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3.5rem);
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-number {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.countdown-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.countdown-separator {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--accent-gold);
+  margin-bottom: 1.2rem;
+}
+
+/* ==========================================================================
+   7. Programme (Timeline)
+   ========================================================================== */
+.timeline {
+  max-width: 750px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 110px;
+  width: 1px;
+  background-color: var(--border-light);
+}
+
+.timeline-entry {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.timeline-time {
+  width: 90px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-gold);
+  font-weight: 400;
+  padding-top: 4px;
+}
+
+.timeline-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--text-main);
+  border-radius: 50%;
+  margin: 9px 30px 0 17px;
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-details {
+  flex: 1;
+}
+
+.event-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.event-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   8. Lieux & Accès
+   ========================================================================== */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.place-card {
+  border: 1px solid var(--border-light);
+  padding: 3.5rem 2.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.place-card:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-4px);
+}
+
+.place-badge {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.place-name {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+}
+
+.place-address {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.place-info {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.place-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-top: 1px solid var(--border-light);
+  padding-top: 1.5rem;
+}
+
+.link-action {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: color var(--transition-fast);
+}
+
+.link-action:hover {
+  color: var(--accent-gold);
+}
+
+.link-separator {
+  color: var(--border-light);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   9. Formulaire RSVP
+   ========================================================================== */
+.rsvp {
+  background-color: rgba(246, 243, 238, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top: 1px solid var(--border-light);
+}
+
+.rsvp-deadline {
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+}
+
+.rsvp-form {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #C8C2B8;
+  padding: 0.8rem 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-main);
+  outline: none;
+  transition: border-color var(--transition-fast);
+  border-radius: 0;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-bottom-color: var(--text-main);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.radio-options {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.radio-label input[type="radio"] {
+  display: none;
+}
+
+.custom-radio {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--text-main);
+  display: inline-block;
+  position: relative;
+}
+
+.radio-label input[type="radio"]:checked + .custom-radio::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background-color: var(--text-main);
+}
+
+.submit-btn {
+  margin-top: 1.5rem;
+  background-color: var(--text-main);
+  color: #FFFFFF;
+  border: 1px solid var(--text-main);
+  padding: 1.2rem 2.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+  align-self: center;
+  border-radius: 0;
+}
+
+.submit-btn:hover {
+  background-color: transparent;
+  color: var(--text-main);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-status {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  min-height: 2rem;
+  margin-top: 1rem;
+}
+
+.form-status.success {
+  color: #2E5A36;
+}
+
+.form-status.error {
+  color: #8C2424;
+}
+
+/* ==========================================================================
+   10. Footer & Logo Footer
+   ========================================================================== */
+.footer {
+  padding: 5rem 0 3rem;
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  background-color: var(--bg-primary);
+}
+
+.footer-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.footer-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+.footer-names {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.25em;
+  margin-bottom: 0.5rem;
+}
+
+.footer-date {
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.footer-credits {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #99948D;
+}
+
+/* ==========================================================================
+   11. Animations d'Apparition
+   ========================================================================== */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   12. Responsive Design (Tablette & Mobile)
+   ========================================================================== */
+@media screen and (max-width: 992px) {
+  .section {
+    padding: 6rem 0;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Empilement propre sur smartphone */
+  .names-row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .family-name-block {
+    margin-top: 0.5rem;
+  }
+
+  .family-name {
+    font-size: 1.05rem;
+    letter-spacing: 0.5em;
+    padding-left: 0.5em;
+  }
+
+  .groom-block,
+  .bride-block {
+    justify-content: center;
+    max-width: 320px;
+  }
+
+  .hero-watermark {
+    width: 55vh;
+    max-width: 340px;
+    opacity: 0.06;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 4.5rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  /* Navigation & Burger */
+  .navbar {
+    padding: 1.2rem 5%;
+  }
+
+  .nav-logo {
+    height: 30px;
+  }
+
+  .nav-toggle {
+    display: flex;
+    z-index: 101;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.2rem;
+    transition: right var(--transition-slow);
+    z-index: 100;
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 7rem 5% 2.5rem;
+  }
+
+  .hero-watermark {
+    width: 75vw;
+    max-width: 270px;
+    opacity: 0.06;
+  }
+
+  .groom-block,
+  .bride-block {
+    max-width: 260px;
+  }
+
+  .couple-name {
+    font-size: clamp(2.4rem, 9vw, 3.2rem);
+  }
+
+  .wedding-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+  }
+
+  /* Édito */
+  .editorial-body {
+    font-size: 1.15rem;
+    line-height: 1.9;
+  }
+
+  /* Compte à Rebours */
+  .countdown-section {
+    padding: 3rem 0;
+  }
+
+  .countdown-separator {
+    display: none;
+  }
+
+  .countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .countdown-number {
+    font-size: 2rem;
+  }
+
+  .countdown-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* Timeline */
+  .timeline::before {
+    left: 14px;
+  }
+
+  .timeline-entry {
+    flex-direction: column;
+    padding-left: 38px;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 11px;
+    top: 5px;
+    margin: 0;
+  }
+
+  .timeline-time {
+    width: auto;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .event-title {
+    font-size: 1.35rem;
+  }
+
+  /* Lieux */
+  .places-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .place-card {
+    padding: 2.2rem 1.8rem;
+  }
+
+  /* Formulaire RSVP */
+  .radio-options {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 1.1rem 1.5rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 4rem 5% 2.5rem;
+  }
+
+  .footer-logo {
+    height: 44px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .groom-block,
+  .bride-block {
+    max-width: 220px;
+  }
+
+  .countdown-number {
+    font-size: 1.6rem;
+  }
+}
