@@ -6,7 +6,7 @@
   <title>Yoram & Linoï — Célébration</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Frank+Ruhl+Libre:wght@400;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -118,29 +118,15 @@
         <h2 class="ceremony-display-title">LA MAIRIE</h2>
       </div>
 
-      <!-- Cadre 60vh -->
+      <!-- Cadre de l'image (80vh) -->
       <div class="ceremony-poster-frame">
-        <!-- Cadre de l'image (80vh) -->
-        <div class="ceremony-poster-frame">
-          
-          <!-- Diaporama Mairie -->
-          <div class="ceremony-slideshow" id="mairieSlideshow">
-            <img src="images/Mairie1.jpg" alt="Mairie du 19ème" class="ceremony-slide is-active">
-            <img src="images/Mairie2.jpg" alt="Mairie du 19ème" class="ceremony-slide">
-            <img src="images/Mairie3.jpg" alt="Mairie du 19ème" class="ceremony-slide">
-            <!-- Ajoute Mairie4.jpg, Mairie5.jpg, etc. selon tes besoins -->
-          </div>
-
-          <!-- Ombre portée noire incrustée en bas de l'image -->
-          <div class="ceremony-bottom-shadow">
-            <h3 class="ceremony-place-title">MAIRIE DU 19<sup>ÈME</sup> ARRONDISSEMENT</h3>
-            <p class="ceremony-place-address">5-7 Place Armand Carrel, 75019 Paris</p>
-            
-            <div class="ceremony-actions">
-              <a href="https://maps.google.com/?q=Mairie+du+19eme+Paris" target="_blank" rel="noopener" class="btn-geo-dark">Google Maps</a>
-              <a href="https://waze.com/ul?q=Mairie+du+19eme+Paris" target="_blank" rel="noopener" class="btn-geo-dark">Waze</a>
-            </div>
-          </div>
+        
+        <!-- Diaporama Mairie -->
+        <div class="ceremony-slideshow" id="mairieSlideshow">
+          <img src="images/Mairie1.jpg" alt="Mairie du 19ème" class="ceremony-slide is-active">
+          <img src="images/Mairie2.jpg" alt="Mairie du 19ème" class="ceremony-slide">
+          <img src="images/Mairie3.jpg" alt="Mairie du 19ème" class="ceremony-slide">
+          <!-- Ajoute Mairie4.jpg, Mairie5.jpg, etc. selon tes besoins -->
         </div>
 
         <!-- Ombre portée noire incrustée en bas de l'image -->
@@ -210,7 +196,6 @@
   </section>
 
   <!-- Section 2 : Houppa & Soirée -->
-  <!-- Section Houppa (Style Affiche Éditoriale) -->
   <section class="section ceremony-editorial" id="houppa">
     <div class="ceremony-container">
       
@@ -220,79 +205,135 @@
         <h2 class="ceremony-display-title">LA HOUPPA</h2>
       </div>
 
-      <!-- Cadre Diaporama (80vh) -->
-      <div class="ceremony-poster-frame">
+      <!-- Faire-part éditorial & Décompte (Sans fond blanc) -->
+      <div class="houppa-invitation-card">
         
-        <!-- Diaporama Houppa avec extensions exactes -->
+        <!-- Arche en hébreu (90% de largeur, sérif fine) -->
+        <div class="hebrew-arc-container">
+          <svg viewBox="0 0 600 130" class="hebrew-arc-svg" aria-hidden="true">
+            <path id="arcPath" d="M 40,120 Q 300,12 560,120" fill="transparent" />
+            <text class="hebrew-arc-text">
+              <textPath href="#arcPath" startOffset="50%" text-anchor="middle">
+                קול ששון וקול שמחה, קול חתן וקול כלה
+              </textPath>
+            </text>
+          </svg>
+        </div>
+
+        <h3 class="invitation-main-title">HOUPPA</h3>
+
+        <!-- Familles en Flex Row avec séparateur -->
+        <div class="families-block">
+          <div class="family-column">
+            <span class="family-role">Famille de la Kala</span>
+            <p class="family-members">M. & Mme [Parents]</p>
+          </div>
+          <div class="family-divider"></div>
+          <div class="family-column">
+            <span class="family-role">Famille du Hatan</span>
+            <p class="family-members">M. & Mme SAADA</p>
+          </div>
+        </div>
+
+        <p class="invitation-intro-phrase">
+          Ont la joie de vous faire part du mariage de leurs enfants
+        </p>
+
+        <!-- Noms des mariés en Flex Row avec prénoms en hébreu -->
+        <div class="invitation-couple">
+          <div class="spouse-block">
+            <span class="spouse-name">Linoï</span>
+            <span class="spouse-hebrew">לינוי</span>
+          </div>
+
+          <span class="couple-ampersand">&</span>
+
+          <div class="spouse-block">
+            <span class="spouse-name">Yoram</span>
+            <span class="spouse-hebrew">יורם</span>
+          </div>
+        </div>
+
+        <!-- Alliances entrelacées -->
+        <div class="invitation-rings" aria-hidden="true">
+          <svg viewBox="0 0 64 36" width="46" height="26" fill="none" stroke="currentColor" stroke-width="1.5">
+            <ellipse cx="22" cy="18" rx="14" ry="11" />
+            <ellipse cx="42" cy="18" rx="14" ry="11" />
+            <polygon points="42,4 44,7 42,9 40,7" fill="currentColor" stroke="none" />
+          </svg>
+        </div>
+
+        <!-- Date & Heure -->
+        <div class="invitation-schedule">
+          <div class="invitation-date">MERCREDI 7 JUILLET 2027</div>
+          <div class="invitation-time">à 18h30</div>
+        </div>
+
+        <!-- Lieu de célébration -->
+        <div class="invitation-venue">
+          <h4 class="venue-name">Pavillon Cambon Capucines</h4>
+          <p class="venue-address">46 Rue Cambon, 75001 Paris</p>
+        </div>
+
+        <!-- Compte à rebours centré -->
+        <div class="ceremony-timer" id="houppaTimer">
+          <div class="timer-box">
+            <span class="timer-num" id="houppa-timer-days">00</span>
+            <span class="timer-tag">Jours</span>
+          </div>
+          <span class="timer-divider">:</span>
+          <div class="timer-box">
+            <span class="timer-num" id="houppa-timer-hours">00</span>
+            <span class="timer-tag">Heures</span>
+          </div>
+          <span class="timer-divider">:</span>
+          <div class="timer-box">
+            <span class="timer-num" id="houppa-timer-minutes">00</span>
+            <span class="timer-tag">Minutes</span>
+          </div>
+          <span class="timer-divider">:</span>
+          <div class="timer-box">
+            <span class="timer-num" id="houppa-timer-seconds">00</span>
+            <span class="timer-tag">Secondes</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Cadre Diaporama (80vh) placé sous les textes -->
+      <div class="ceremony-poster-frame">
         <div class="ceremony-slideshow" id="houppaSlideshow">
           <img src="images/Houppa1.jpeg" alt="Cérémonie de la Houppa" class="ceremony-slide is-active">
           <img src="images/Houppa2.jpg" alt="Cérémonie de la Houppa" class="ceremony-slide">
           <img src="images/Houppa3.jpeg" alt="Cérémonie de la Houppa" class="ceremony-slide">
         </div>
 
-        <!-- Fondu sombre & informations du lieu -->
         <div class="ceremony-bottom-shadow">
           <h3 class="ceremony-place-title">HOUPPA & SOIRÉE</h3>
-          <p class="ceremony-place-address">Adresse du lieu de réception, Ville</p>
+          <p class="ceremony-place-address">Pavillon Cambon Capucines — 46 Rue Cambon, 75001 Paris</p>
           
           <div class="ceremony-actions">
-            <a href="https://maps.google.com/?q=Adresse+Houppa" target="_blank" rel="noopener" class="btn-geo-dark">Google Maps</a>
-            <a href="https://waze.com/ul?q=Adresse+Houppa" target="_blank" rel="noopener" class="btn-geo-dark">Waze</a>
+            <a href="https://maps.google.com/?q=Pavillon+Cambon+Capucines+Paris" target="_blank" rel="noopener" class="btn-geo-dark">Google Maps</a>
+            <a href="https://waze.com/ul?q=Pavillon+Cambon+Capucines+Paris" target="_blank" rel="noopener" class="btn-geo-dark">Waze</a>
           </div>
         </div>
       </div>
-      
 
-      <!-- Informations complémentaires & Compte à rebours -->
-      <div class="ceremony-details">
-        
-        <!-- Date & Horaires pleine largeur -->
-        <div class="ceremony-date-feature">
-          <span class="meta-label">Date & Horaires</span>
-          <div class="ceremony-date-heading">MERCREDI 7 JUILLET 2027</div>
-          <div class="ceremony-time-heading">Cérémonie à 18h30 <span>•</span> Accueil dès 18h00</div>
-          
-          <!-- Timer centré -->
-          <div class="ceremony-timer" id="houppaTimer">
-            <div class="timer-box">
-              <span class="timer-num" id="houppa-timer-days">00</span>
-              <span class="timer-tag">Jours</span>
-            </div>
-            <span class="timer-divider">:</span>
-            <div class="timer-box">
-              <span class="timer-num" id="houppa-timer-hours">00</span>
-              <span class="timer-tag">Heures</span>
-            </div>
-            <span class="timer-divider">:</span>
-            <div class="timer-box">
-              <span class="timer-num" id="houppa-timer-minutes">00</span>
-              <span class="timer-tag">Minutes</span>
-            </div>
-            <span class="timer-divider">:</span>
-            <div class="timer-box">
-              <span class="timer-num" id="houppa-timer-seconds">00</span>
-              <span class="timer-tag">Secondes</span>
-            </div>
-          </div>
+      <!-- Grille secondaire (Accès & Précisions) sous l'image -->
+      <div class="ceremony-sub-grid">
+        <div class="meta-col">
+          <span class="meta-label">Accès & Stationnement</span>
+          <p class="meta-text">
+            Service voiturier et parking privé sécurisé disponibles sur place pour l'ensemble des convives.
+          </p>
         </div>
 
-        <!-- Grille secondaire (Accès & Précisions) -->
-        <div class="ceremony-sub-grid">
-          <div class="meta-col">
-            <span class="meta-label">Accès & Stationnement</span>
-            <p class="meta-text">
-              Parking privé sécurisé disponible sur place pour l'ensemble des convives.
-            </p>
-          </div>
-
-          <div class="meta-col">
-            <span class="meta-label">Précision</span>
-            <p class="meta-text">
-              La cérémonie religieuse débutera avec ponctualité sous la Houppa, suivie du cocktail et de la réception.
-            </p>
-          </div>
+        <div class="meta-col">
+          <span class="meta-label">Précision</span>
+          <p class="meta-text">
+            La cérémonie religieuse débutera avec ponctualité sous la Houppa, suivie du cocktail et de la réception.
+          </p>
         </div>
-
       </div>
 
     </div>
