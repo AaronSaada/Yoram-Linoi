@@ -353,8 +353,8 @@ body {
    5. Édito / Invitation & Signature
    ========================================================================== */
 .edito {
-  border-top: 1px solid var(--border-light);
-  border-bottom: 1px solid var(--border-light);
+  border-top: none;
+  border-bottom: none;
   text-align: center;
 }
 
@@ -398,7 +398,7 @@ body {
   background-color: rgba(244, 241, 234, 0.7);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: none;
 }
 
 .countdown-grid {
@@ -586,7 +586,7 @@ body {
   background-color: rgba(246, 243, 238, 0.8);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border-top: 1px solid var(--border-light);
+  border-top: none;
 }
 
 .rsvp-deadline {
