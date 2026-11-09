@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Musique de fond
   initBackgroundMusic();
+  
+  // Sélecteurs
+  initCustomSelect();
 });
 
 /**
@@ -521,6 +524,68 @@ function initBackgroundMusic() {
     } else {
       music.pause();
       setMutedState();
+    }
+  });
+}
+
+/**
+ * Initialisation du Select Haute Couture
+ */
+function initCustomSelect() {
+  const wrapper = document.querySelector('.select-wrapper');
+  if (!wrapper) return;
+
+  const select = wrapper.querySelector('select');
+  if (!select) return;
+
+  wrapper.classList.add('custom-select');
+
+  // 1. Création du bouton visible
+  const trigger = document.createElement('div');
+  trigger.className = 'custom-select-trigger';
+  trigger.innerHTML = `
+    <span class="custom-select-value">${select.options[select.selectedIndex]?.text || ''}</span>
+    <span class="custom-select-arrow" aria-hidden="true"></span>
+  `;
+  wrapper.appendChild(trigger);
+
+  // 2. Création de la liste personnalisée
+  const menu = document.createElement('ul');
+  menu.className = 'custom-select-menu';
+
+  Array.from(select.options).forEach((opt, idx) => {
+    const li = document.createElement('li');
+    li.className = 'custom-select-option';
+    li.textContent = opt.text;
+    li.dataset.value = opt.value;
+    if (idx === select.selectedIndex) li.classList.add('is-selected');
+
+    li.addEventListener('click', () => {
+      select.value = opt.value;
+      select.dispatchEvent(new Event('change')); // Maintient les écouteurs natifs
+      trigger.querySelector('.custom-select-value').textContent = opt.text;
+
+      menu.querySelectorAll('.custom-select-option').forEach(el => el.classList.remove('is-selected'));
+      li.classList.add('is-selected');
+
+      wrapper.classList.remove('is-open');
+    });
+
+    menu.appendChild(li);
+  });
+
+  wrapper.appendChild(menu);
+
+  // 3. Ouverture / Fermeture au clic
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrapper.classList.toggle('is-open');
+  });
+
+  // Fermeture si on clique ailleurs sur la page
+  document.addEventListener('click', (e) => {
+    if (!wrapper.contains(e.target)) {
+      wrapper.classList.remove('is-open');
     }
   });
 }
