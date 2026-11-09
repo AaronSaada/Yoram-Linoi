@@ -1932,8 +1932,8 @@ body {
   }
 
   .ceremony-poster-frame {
-    height: 60vh;
-    min-height: 420px;
+    height: 50vh;          /* Réduit de 60vh à 50vh */
+    min-height: 340px;     /* Ajusté pour que les 50vh s'appliquent bien */
   }
 
   .ceremony-bottom-shadow {
