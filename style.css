@@ -1225,26 +1225,6 @@ body {
   margin-top: 2rem;
 }
 
-/* Responsive Houppa */
-@media screen and (max-width: 768px) {
-  .families-block {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .family-divider {
-    width: 50px;
-    height: 1px;
-  }
-
-  .hebrew-arc-container {
-    width: 95%;
-  }
-
-  .hebrew-arc-text {
-    font-size: 26px;
-  }
-}
 
 /* ==========================================================================
    9. Formulaire RSVP — Style Éditorial Minimaliste & Haute Couture
@@ -1989,6 +1969,29 @@ body {
 
   .ceremony-timer {
     gap: 0.8rem;
+  }
+
+  .families-block {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .family-divider {
+    width: 50px;
+    height: 1px;
+  }
+
+  /* ==========================================================================
+     HOUPPA : AGRANDISSEMENT DE L'ARCHE EN HÉBREU
+     ========================================================================== */
+  .hebrew-arc-container {
+    width: 100% !important; /* Occupe toute la largeur utile de la carte */
+    margin: 0 auto 1.8rem !important;
+  }
+
+  .hebrew-arc-text {
+    font-size: 38px !important; /* Rétablit la taille de l'arche à son échelle maximale */
+    font-weight: 500 !important; /* Donne un peu plus d'assise aux lettres hébraïques */
   }
 
   .ceremony-sub-grid {
