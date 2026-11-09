@@ -502,7 +502,7 @@ function initHouppaTimer() {
 }
 
 /**
- * Gestion de la musique de fond & contournement autoplay mobile
+ * Gestion de la musique de fond (Désactivée au départ, bascule propre au clic)
  */
 function initBackgroundMusic() {
   const music = document.getElementById('bgMusic');
@@ -513,59 +513,31 @@ function initBackgroundMusic() {
 
   music.volume = 0.35;
 
-  function setPlayingState() {
-    toggleBtn.classList.remove('is-muted');
-    label.textContent = 'COUPER LA MUSIQUE';
-  }
+  // État initial verrouillé : musique coupée
+  music.pause();
+  toggleBtn.classList.add('is-muted');
+  label.textContent = 'ACTIVER LA MUSIQUE';
+  toggleBtn.setAttribute('aria-label', 'Activer la musique');
 
-  function setMutedState() {
-    toggleBtn.classList.add('is-muted');
-    label.textContent = 'ACTIVER LA MUSIQUE';
-  }
-
-  // Événements d'interaction physique acceptés par iOS / Android
-  const interactionEvents = ['touchstart', 'touchend', 'click'];
-
-  function removeUnlockListeners() {
-    interactionEvents.forEach(evt => {
-      document.removeEventListener(evt, handleFirstInteraction, true);
-    });
-  }
-
-  function handleFirstInteraction() {
-    music.play()
-      .then(() => {
-        setPlayingState();
-        removeUnlockListeners(); // Se retire UNIQUEMENT si la lecture a bien démarré
-      })
-      .catch(() => {
-        // En cas de refus (ex: swipe rapide), les écouteurs restent actifs pour le prochain appui
-      });
-  }
-
-  // 1. Tentative sur Desktop
-  music.play()
-    .then(setPlayingState)
-    .catch(() => {
-      // 2. Blocage mobile : mise en attente de la première interaction
-      setMutedState();
-      interactionEvents.forEach(evt => {
-        document.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
-      });
-    });
-
-  // 3. Bouton flottant manuel
+  // Bascule directe au clic / tap
   toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
 
     if (music.paused) {
-      music.play().then(() => {
-        setPlayingState();
-        removeUnlockListeners();
-      });
+      music.play()
+        .then(() => {
+          toggleBtn.classList.remove('is-muted');
+          label.textContent = 'COUPER LA MUSIQUE';
+          toggleBtn.setAttribute('aria-label', 'Couper la musique');
+        })
+        .catch((err) => {
+          console.warn("Lecture audio bloquée :", err);
+        });
     } else {
       music.pause();
-      setMutedState();
+      toggleBtn.classList.add('is-muted');
+      label.textContent = 'ACTIVER LA MUSIQUE';
+      toggleBtn.setAttribute('aria-label', 'Activer la musique');
     }
   });
 }
