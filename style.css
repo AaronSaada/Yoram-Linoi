@@ -1553,24 +1553,6 @@ body {
   color: #a82323;
 }
 
-/* Adaptation responsive */
-@media screen and (max-width: 768px) {
-  .rsvp {
-    padding: 5rem 0 6rem;
-  }
-
-  .rsvp .section-header {
-    margin-bottom: 2.8rem;
-  }
-
-  .rsvp-form {
-    gap: 2rem;
-  }
-
-  .submit-btn {
-    padding: 1.15rem 1.5rem;
-  }
-}
 
 
 /* ==========================================================================
@@ -2194,52 +2176,114 @@ body {
   }
 
   /* ==========================================================================
-     8. FORMULAIRE RSVP
+     FORMULAIRE RSVP (MOBILE UNIQUEMENT) — AÉRATION & CONFORT TACTILE
      ========================================================================== */
   .rsvp {
-    padding: 5rem 0 6rem;
+    padding: 6.5rem 0 7.5rem !important;
   }
 
+  .rsvp .container-narrow {
+    width: 90% !important;
+    max-width: 100% !important;
+  }
+
+  /* En-tête de section */
   .rsvp .section-header {
-    margin-bottom: 2.8rem;
+    text-align: left !important;
+    margin-bottom: 3.5rem !important;
+    gap: 0.8rem !important;
   }
 
+  .rsvp .subtitle {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  .rsvp .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .rsvp-deadline {
+    font-size: 0.82rem !important;
+    letter-spacing: 0.1em !important;
+    line-height: 1.7 !important;
+    margin-top: 0.6rem !important;
+  }
+
+  /* Espacement vertical entre chaque question */
   .rsvp-form {
-    gap: 2rem;
+    gap: 2.8rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  /* Espacement interne entre libellé et zone de saisie */
+  .form-group {
+    gap: 0.9rem !important;
   }
 
   .form-group label,
-  .radio-label {
-    font-size: 1.05rem;
+  .form-group .group-label {
+    font-size: 0.76rem !important;
+    letter-spacing: 0.2em !important;
   }
 
-  /* Maintien strict à 16px contre l'auto-zoom iOS */
+  /* Champs de saisie & déclencheur custom select (blocage anti-zoom iOS Safari) */
   .rsvp-form input[type="text"],
   .rsvp-form input[type="email"],
   .rsvp-form input[type="tel"],
-  .rsvp-form select,
   .rsvp-form textarea,
-  .rsvp-container input,
-  .rsvp-container select,
-  .rsvp-container textarea {
+  .custom-select-trigger {
     font-size: 16px !important;
+    padding: 1.05rem 0 !important;
+    letter-spacing: 0.04em !important;
   }
 
+  .rsvp-form textarea {
+    min-height: 95px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Liste déroulante sur smartphone */
+  .custom-select-menu {
+    max-height: 220px !important;
+  }
+
+  .custom-select-option {
+    font-size: 0.72rem !important;
+    padding: 0.9rem 1.2rem !important;
+  }
+
+  /* Choix radio ("Présent(s) !" / "Pas présent(s)") */
   .radio-options {
-    flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.4rem !important;
+    margin-top: 0.6rem !important;
   }
 
+  .radio-label {
+    font-size: 0.92rem !important;
+    letter-spacing: 0.08em !important;
+    gap: 1.1rem !important;
+  }
+
+  .custom-radio {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  /* Bouton d'envoi */
   .submit-btn {
-    width: 100%;
-    padding: 1.15rem 1.5rem;
-    font-size: 0.95rem;
-    letter-spacing: 0.22em;
+    margin-top: 2.5rem !important;
+    padding: 1.35rem 1.5rem !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.22em !important;
   }
 
+  /* Message de statut */
   .form-status {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 0.88rem !important;
+    line-height: 1.65 !important;
+    margin-top: 1.8rem !important;
   }
 
   /* ==========================================================================
