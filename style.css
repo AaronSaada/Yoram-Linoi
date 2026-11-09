@@ -1686,19 +1686,6 @@ body {
   opacity: 1;
 }
 
-@media screen and (max-width: 768px) {
-  .audio-toggle {
-    bottom: 1.2rem;
-    left: 1.2rem;
-    padding: 0.55rem 0.85rem;
-  }
-
-  .audio-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-  }
-}
-
 /* ==========================================================================
    12. Responsive Design (Tablette & Mobile)
    ========================================================================== */
@@ -1742,6 +1729,17 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  /* ==========================================================================
+     0. TAILLE DE POLICE GLOBALE (Agrandissement mobile)
+     ========================================================================== */
+  p,
+  .event-details,
+  .timeline-entry p,
+  .place-card p {
+    font-size: 1.12rem;
+    line-height: 1.75;
+  }
+
   .section {
     padding: 4.5rem 0;
   }
@@ -1750,13 +1748,15 @@ body {
     margin-bottom: 3rem;
   }
 
-  /* Navigation & Burger */
+  /* ==========================================================================
+     1. NAVIGATION & BURGER
+     ========================================================================== */
   .navbar {
     padding: 1.2rem 5%;
   }
 
   .nav-logo {
-    height: 30px;
+    height: 32px;
   }
 
   .nav-toggle {
@@ -1785,8 +1785,8 @@ body {
   }
 
   .nav-links a {
-    font-size: 0.95rem;
-    letter-spacing: 0.3em;
+    font-size: 1.15rem;
+    letter-spacing: 0.32em;
   }
 
   .nav-toggle.open span:nth-child(1) {
@@ -1796,7 +1796,9 @@ body {
     transform: translateY(-3.5px) rotate(-45deg);
   }
 
-  /* Hero */
+  /* ==========================================================================
+     2. HERO (YORAM -> SAADA -> LINOÏ)
+     ========================================================================== */
   .hero {
     padding: 7rem 5% 2.5rem;
   }
@@ -1807,24 +1809,87 @@ body {
     opacity: 0.06;
   }
 
-  .groom-block,
-  .bride-block {
-    max-width: 260px;
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Dissout le conteneur intermédiaire pour ordonner directement les enfants */
+  .names-row {
+    display: contents;
+  }
+
+  /* 1. YORAM */
+  .groom-block {
+    order: 1;
+    max-width: 280px;
+    margin: 0;
+  }
+
+  /* 2. SAADA (Agrandissement taille & présence) */
+  .family-name-block {
+    order: 2;
+  }
+
+  .family-name {
+    font-size: 2rem; /* Augmentation nette de la taille de SAADA */
+    font-weight: 500;
+    letter-spacing: 0.55em;
+    display: inline-block;
+  }
+
+  /* 3. LINOÏ */
+  .bride-block {
+    order: 3;
+    max-width: 280px;
+    margin: 0;
+  }
+
+  /* Noms des mariés : Graisse augmentée d'un cran (500) */
   .couple-name {
-    font-size: clamp(2.4rem, 9vw, 3.2rem);
+    font-size: clamp(3rem, 12vw, 4rem);
+    font-weight: 400;
+  }
+
+  .couple-name span {
+    font-weight: 500; /* Assure la transmission de la graisse sur chaque lettre */
+  }
+
+  /* Reste des éléments du Hero */
+  .hero-content > *:not(.names-row):not(.family-name-block) {
+    order: 4;
   }
 
   .wedding-date {
-    font-size: 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.32em;
+    margin-top: 1.8rem;
+  }
+
+  .hero-location {
+    font-size: 0.85rem;
     letter-spacing: 0.28em;
   }
 
-  /* Édito */
+  .scroll-discover,
+  .discover-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.35em;
+    margin-top: 1.5rem;
+  }
+
+  /* ==========================================================================
+     3. ÉDITORIAL & CÉRÉMONIES
+     ========================================================================== */
+  .editorial-title {
+    font-size: 2.1rem;
+    line-height: 1.25;
+  }
+
   .editorial-body {
-    font-size: 1.15rem;
-    line-height: 1.9;
+    font-size: 1.25rem;
+    line-height: 1.95;
   }
 
   .ceremony-meta-grid {
@@ -1882,9 +1947,13 @@ body {
 
   .btn-geo-dark {
     text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
   }
 
-  /* Décomptes mobiles agrandis sans bordure */
+  /* ==========================================================================
+     4. DÉCOMPTES MOBILES
+     ========================================================================== */
   .card-countdown {
     gap: 0.8rem;
     padding: 0.5rem 0;
@@ -1895,19 +1964,26 @@ body {
   }
 
   .card-countdown-item {
-    min-width: 46px;
+    min-width: 48px;
   }
 
   .card-countdown-number {
-    font-size: 2rem; /* Taille rehaussée sur smartphone */
+    font-size: 2.3rem;
   }
 
   .card-countdown-separator {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     margin-bottom: 0.5rem;
   }
 
-  /* Timeline */
+  .card-countdown-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+  }
+
+  /* ==========================================================================
+     5. PROGRAMME & LIEUX
+     ========================================================================== */
   .timeline::before {
     left: 14px;
   }
@@ -1927,15 +2003,15 @@ body {
 
   .timeline-time {
     width: auto;
-    font-size: 0.8rem;
-    margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
   }
 
   .event-title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 
-  /* Lieux */
   .places-grid {
     grid-template-columns: 1fr;
     gap: 1.8rem;
@@ -1945,7 +2021,27 @@ body {
     padding: 2.2rem 1.8rem;
   }
 
-  /* Formulaire RSVP */
+  .place-card h3 {
+    font-size: 1.45rem;
+  }
+
+  /* ==========================================================================
+     6. FORMULAIRE RSVP
+     ========================================================================== */
+  .form-group label,
+  .radio-label {
+    font-size: 1.05rem;
+  }
+
+  /* Maintien strict à 16px pour désactiver le zoom iOS automatique */
+  .rsvp-container input[type="text"],
+  .rsvp-container input[type="email"],
+  .rsvp-container input[type="tel"],
+  .rsvp-container select,
+  .rsvp-container textarea {
+    font-size: 16px !important;
+  }
+
   .radio-options {
     flex-direction: column;
     gap: 1.2rem;
@@ -1953,16 +2049,47 @@ body {
 
   .submit-btn {
     width: 100%;
-    padding: 1.1rem 1.5rem;
+    padding: 1.15rem 1.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.22em;
   }
 
-  /* Footer */
+  .form-status {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ==========================================================================
+     7. BOUTON AUDIO FLOTTANT (Haut-Droit 20px)
+     ========================================================================== */
+  .audio-toggle {
+    bottom: auto;
+    left: auto;
+    top: calc(20px + env(safe-area-inset-top, 0px));
+    right: calc(20px + env(safe-area-inset-right, 0px));
+    z-index: 1000;
+  }
+
+  .audio-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* ==========================================================================
+     8. FOOTER
+     ========================================================================== */
   .footer {
     padding: 4rem 5% 2.5rem;
   }
 
   .footer-logo {
-    height: 44px;
+    height: 46px;
+  }
+
+  .footer p,
+  .footer-credits {
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 }
 
