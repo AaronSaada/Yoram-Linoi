@@ -2076,13 +2076,7 @@ body {
 
   /* Familles côte à côte */
   .families-block {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center !important;
-    align-items: stretch !important;
-    gap: 1.4rem !important;
-    width: 100% !important;
-    margin-bottom: 2.8rem !important; /* Espace sous les parents */
+    gap: 1.8rem !important;
   }
 
   .family-column {
@@ -2095,10 +2089,7 @@ body {
   }
 
   .family-divider {
-    width: 1px !important;
-    height: auto !important;
-    align-self: stretch !important;
-    background-color: var(--border-light) !important;
+    display: none !important;
   }
 
   .family-role {
