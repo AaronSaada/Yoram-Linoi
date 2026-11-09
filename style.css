@@ -1703,8 +1703,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
   /* ==========================================================================
-     0. TAILLE DE POLICE GLOBALE (Agrandissement mobile)
+     0. TYPOGRAPHIE & ESPACEMENTS GÉNÉRAUX
      ========================================================================== */
   p,
   .event-details,
@@ -1723,7 +1724,7 @@ body {
   }
 
   /* ==========================================================================
-     1. NAVIGATION & BURGER
+     1. NAVIGATION FLOTTANTE & BURGER
      ========================================================================== */
   .navbar {
     padding: 1.2rem 5%;
@@ -1789,7 +1790,6 @@ body {
     align-items: center;
   }
 
-  /* Dissout le conteneur intermédiaire pour ordonner directement les enfants */
   .names-row {
     display: contents;
   }
@@ -1801,13 +1801,14 @@ body {
     margin: 0;
   }
 
-  /* 2. SAADA (Agrandissement taille & présence) */
+  /* 2. SAADA */
   .family-name-block {
     order: 2;
+    margin: 1rem 0;
   }
 
   .family-name {
-    font-size: 2rem; /* Augmentation nette de la taille de SAADA */
+    font-size: 2rem;
     font-weight: 500;
     letter-spacing: 0.55em;
     display: inline-block;
@@ -1820,17 +1821,15 @@ body {
     margin: 0;
   }
 
-  /* Noms des mariés : Graisse augmentée d'un cran (500) */
   .couple-name {
     font-size: clamp(3rem, 12vw, 4rem);
     font-weight: 400;
   }
 
   .couple-name span {
-    font-weight: 500; /* Assure la transmission de la graisse sur chaque lettre */
+    font-weight: 500;
   }
 
-  /* Reste des éléments du Hero */
   .hero-content > *:not(.names-row):not(.family-name-block) {
     order: 4;
   }
@@ -1854,9 +1853,9 @@ body {
   }
 
   /* ==========================================================================
-     3. ÉDITORIAL & CÉRÉMONIES
+     3. ÉDITORIAL & CARROUSEL
      ========================================================================== */
-  .editorial-title {
+  .title-editorial {
     font-size: 2.1rem;
     line-height: 1.25;
   }
@@ -1866,6 +1865,47 @@ body {
     line-height: 1.95;
   }
 
+  .editorial-carousel {
+    margin: 2.5rem 0 3rem;
+  }
+
+  .carousel-slide {
+    flex: 0 0 210px;
+  }
+
+  /* ==========================================================================
+     4. CÉRÉMONIES (MAIRIE & HOUPPA POSTERS / ACTIONS)
+     ========================================================================== */
+  .ceremony-editorial {
+    padding: 4rem 0 !important;
+    min-height: auto !important; /* Retrait de la contrainte 100vh */
+    height: auto !important;
+  }
+
+  .ceremony-poster-frame {
+    height: 50vh;
+    min-height: 340px;
+  }
+
+  .ceremony-bottom-shadow {
+    padding: 4rem 1.4rem 1.8rem;
+  }
+
+  .ceremony-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn-geo-dark {
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+  }
+
+  .ceremony-details {
+    margin-top: 2.5rem;
+  }
+
   .ceremony-meta-grid {
     grid-template-columns: 1fr;
     gap: 1.8rem;
@@ -1873,21 +1913,14 @@ body {
     padding-top: 1.8rem;
   }
 
-  /* ==========================================================================
-     INTERLUDE PHOTO : RECENTRAGE HORIZONTAL
-     ========================================================================== */
-  .fullwidth-photo-break {
-    height: 30vh;
+  .ceremony-sub-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
   }
 
-  .fullwidth-photo-img {
-    object-position: 57% center; /* Centre parfaitement l'image en largeur et hauteur */
-    object-fit: cover;
-  }
-
-
   /* ==========================================================================
-     TIMERS MAIRIE & HOUPPA : JOURS AU-DESSUS & POLICE NATIVE PRÉSERVÉE
+     5. TIMERS MAIRIE & HOUPPA (JOURS EN GRAND AU-DESSUS)
      ========================================================================== */
   .ceremony-timer {
     display: flex !important;
@@ -1897,26 +1930,23 @@ body {
     gap: 0.5rem 0.6rem !important;
     width: 100% !important;
     max-width: 300px !important;
-    margin: 0 auto !important;
+    margin: 1.8rem auto 0 !important;
   }
 
-  /* 1. Bloc des JOURS (1ère ligne) */
   .ceremony-timer > .timer-box:first-of-type {
     flex: 0 0 100% !important;
     width: 100% !important;
     text-align: center !important;
     margin-bottom: 0.4rem !important;
-    margin-top: 1rem;
+    margin-top: 0.5rem !important;
   }
 
-  /* Chiffre des jours : uniquement la taille et la disposition */
   .ceremony-timer > .timer-box:first-of-type .timer-num {
-    font-size: 3rem !important;
+    font-size: 3.4rem !important;
     line-height: 1 !important;
     display: block !important;
   }
 
-  /* Label "Jours" */
   .ceremony-timer > .timer-box:first-of-type .timer-tag {
     font-size: 0.78rem !important;
     letter-spacing: 0.28em !important;
@@ -1926,12 +1956,10 @@ body {
     opacity: 0.75;
   }
 
-  /* 2. Masque le 1er séparateur (deux-points) après les jours */
   .ceremony-timer > .timer-divider:first-of-type {
     display: none !important;
   }
 
-  /* 3. Ligne inférieure : Heures, Minutes, Secondes */
   .ceremony-timer > .timer-box:not(:first-of-type) {
     min-width: 48px !important;
     text-align: center !important;
@@ -1952,174 +1980,170 @@ body {
     opacity: 0.75;
   }
 
-  /* Séparateurs restants */
   .ceremony-timer > .timer-divider {
     font-size: 1.4rem !important;
     margin-bottom: 0.8rem !important;
     opacity: 0.45 !important;
   }
 
-  .ceremony-editorial {
-    padding: 3.5rem 0;
+  /* ==========================================================================
+     6. INTERLUDE PHOTO
+     ========================================================================== */
+  .fullwidth-photo-break {
+    height: 45vh;
+    min-height: 260px;
   }
 
-  .ceremony-details {
-    margin-top: 2.5rem;
-  }
-
-  .ceremony-timer {
-    gap: 0.8rem;
-  }
-
-  .families-block {
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .family-divider {
-    width: 50px;
-    height: 1px;
+  .fullwidth-photo-img {
+    object-position: center center !important;
   }
 
   /* ==========================================================================
-     HOUPPA : AGRANDISSEMENT DE L'ARCHE EN HÉBREU
+     7. HOUPPA : ARCHE, FAMILLES CÔTE À CÔTE & AÉRATION HAUTE COUTURE
      ========================================================================== */
+  .houppa-invitation-card {
+    margin: 1.5rem auto 3.5rem !important;
+  }
+
+  /* Arche hébraïque aérée */
   .hebrew-arc-container {
-    width: 100% !important; /* Occupe toute la largeur utile de la carte */
-    margin: 0 auto 1.8rem !important;
+    width: 100% !important;
+    margin: 0 auto 2.4rem !important; /* Espace sous l'arche */
   }
 
   .hebrew-arc-text {
-    font-size: 38px !important; /* Rétablit la taille de l'arche à son échelle maximale */
-    font-weight: 500 !important; /* Donne un peu plus d'assise aux lettres hébraïques */
+    font-size: 38px !important;
+    font-weight: 500 !important;
   }
 
-  .ceremony-sub-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding-top: 2rem;
-  }
-
-  .event-card-single {
-    padding: 2.5rem 1.5rem;
-  }
-
+  /* Familles côte à côte */
   .families-block {
-    flex-direction: column;
-    gap: 1.2rem;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    gap: 1.4rem !important;
+    width: 100% !important;
+    margin-bottom: 2.8rem !important; /* Espace sous les parents */
+  }
+
+  .family-column {
+    flex: 1 1 0 !important;
+    text-align: center !important;
+    min-width: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.65rem !important; /* Espacement aéré entre chaque personne */
   }
 
   .family-divider {
-    width: 60px;
-    height: 1px;
+    width: 1px !important;
+    height: auto !important;
+    align-self: stretch !important;
+    background-color: var(--border-light) !important;
   }
 
-  .ceremony-poster-frame {
-    height: 50vh;          /* Réduit de 60vh à 50vh */
-    min-height: 340px;     /* Ajusté pour que les 50vh s'appliquent bien */
+  .family-role {
+    font-size: 0.62rem !important;
+    letter-spacing: 0.14em !important;
+    margin-bottom: 0.4rem !important;
+    white-space: nowrap;
   }
 
-  .ceremony-bottom-shadow {
-    padding: 4rem 1.4rem 1.8rem;
+  .family-members {
+    font-size: 0.66rem !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.5 !important;
   }
 
-  .ceremony-actions {
-    flex-direction: column;
-    gap: 0.5rem;
+  /* Phrase d'annonce */
+  .invitation-intro-phrase {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.2em !important;
+    line-height: 2 !important;
+    margin: 0 0 2.8rem !important; /* Respiration avant les prénoms */
   }
 
-  .btn-geo-dark {
-    text-align: center;
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
+  /* Prénoms des mariés (Linoï & Yoram) */
+  .invitation-couple {
+    gap: 1.8rem !important;
+    margin-bottom: 2.8rem !important; /* Respiration après les prénoms */
   }
 
-  /* ==========================================================================
-     4. DÉCOMPTES MOBILES
-     ========================================================================== */
-  .card-countdown {
-    gap: 0.8rem;
-    padding: 0.5rem 0;
-    width: 100%;
-    max-width: 340px;
-    background: transparent;
-    border: none;
+  .spouse-name {
+    font-size: 2.8rem !important;
   }
 
-  .card-countdown-item {
-    min-width: 48px;
+  .spouse-hebrew {
+    font-size: 1.45rem !important;
+    margin-top: 0.3rem !important;
   }
 
-  .card-countdown-number {
-    font-size: 2.3rem;
+  .couple-ampersand {
+    font-size: 1.8rem !important;
   }
 
-  .card-countdown-separator {
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
+  /* Phrase d'hommage */
+  .invitation-memorial-phrase {
+    font-size: 0.7rem !important;
+    letter-spacing: 0.18em !important;
+    line-height: 2 !important;
+    margin: 2.5rem auto 2.2rem !important; /* Respiration au-dessus et en-dessous */
+    max-width: 320px !important;
   }
 
-  .card-countdown-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
+  /* Bloc des défunts */
+  .memorial-names-block {
+    margin-bottom: 3.5rem !important; /* Espace avant la date et l'horaire */
   }
 
-  /* ==========================================================================
-     5. PROGRAMME & LIEUX
-     ========================================================================== */
-  .timeline::before {
-    left: 14px;
+  .memorial-names-block .family-column {
+    gap: 0.8rem !important; /* Aère distinctement chaque proche disparu */
   }
 
-  .timeline-entry {
-    flex-direction: column;
-    padding-left: 38px;
-    margin-bottom: 2.5rem;
+  /* Date & Horaires de la Houppa */
+  .invitation-schedule {
+    margin-bottom: 2.5rem !important;
   }
 
-  .timeline-dot {
-    position: absolute;
-    left: 11px;
-    top: 5px;
-    margin: 0;
+  .invitation-date {
+    font-size: 1.15rem !important;
+    letter-spacing: 0.14em !important;
   }
 
-  .timeline-time {
-    width: auto;
-    font-size: 0.95rem;
-    letter-spacing: 0.15em;
-    margin-bottom: 0.3rem;
-  }
-
-  .event-title {
-    font-size: 1.5rem;
-  }
-
-  .places-grid {
-    grid-template-columns: 1fr;
-    gap: 1.8rem;
-  }
-
-  .place-card {
-    padding: 2.2rem 1.8rem;
-  }
-
-  .place-card h3 {
-    font-size: 1.45rem;
+  .invitation-time {
+    font-size: 1.85rem !important;
+    letter-spacing: 0.18em !important;
+    margin-top: 0.7rem !important;
   }
 
   /* ==========================================================================
-     6. FORMULAIRE RSVP
+     8. FORMULAIRE RSVP
      ========================================================================== */
+  .rsvp {
+    padding: 5rem 0 6rem;
+  }
+
+  .rsvp .section-header {
+    margin-bottom: 2.8rem;
+  }
+
+  .rsvp-form {
+    gap: 2rem;
+  }
+
   .form-group label,
   .radio-label {
     font-size: 1.05rem;
   }
 
-  /* Maintien strict à 16px pour désactiver le zoom iOS automatique */
-  .rsvp-container input[type="text"],
-  .rsvp-container input[type="email"],
-  .rsvp-container input[type="tel"],
+  /* Maintien strict à 16px contre l'auto-zoom iOS */
+  .rsvp-form input[type="text"],
+  .rsvp-form input[type="email"],
+  .rsvp-form input[type="tel"],
+  .rsvp-form select,
+  .rsvp-form textarea,
+  .rsvp-container input,
   .rsvp-container select,
   .rsvp-container textarea {
     font-size: 16px !important;
@@ -2143,7 +2167,7 @@ body {
   }
 
   /* ==========================================================================
-     7. BOUTON AUDIO FLOTTANT (Haut-Droit 20px)
+     9. BOUTON AUDIO FLOTTANT (Haut-Droit 20px)
      ========================================================================== */
   .audio-toggle {
     bottom: auto;
@@ -2159,7 +2183,7 @@ body {
   }
 
   /* ==========================================================================
-     8. FOOTER
+     10. PIED DE PAGE / FOOTER
      ========================================================================== */
   .footer {
     padding: 4rem 5% 2.5rem;
