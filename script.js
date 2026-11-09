@@ -209,8 +209,8 @@ function initEditorialCarousel() {
   if (initialSlides.length === 0) return;
 
   // Cloner deux fois le lot d'origine pour obtenir 3 jeux continus [Set A, Set B, Set C]
-  initialSlides.forEach((slide) => track.appendChild(slide.cloneNode(true)));
-  initialSlides.forEach((slide) => track.appendChild(slide.cloneNode(true)));
+  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+  initialSlides.forEach(slide => track.appendChild(slide.cloneNode(true)));
 
   let singleSetWidth = 0;
 
@@ -226,12 +226,24 @@ function initEditorialCarousel() {
   let currentX = -singleSetWidth;
   let targetX = -singleSetWidth;
 
-  // Variables de glissement
+  // Variables de glissement & vitesse autonome
   let isDragging = false;
   let lastX = 0;
   let velocity = 0;
 
-  // Événements Souris
+  // Vitesse de croisière automatique (~0.45 px par frame pour un mouvement discret)
+  const autoSpeed = 0.45;
+
+  // Optionnel : mettre à true pour suspendre le défilement au survol de la souris
+  const pauseOnHover = false;
+  let isHovered = false;
+
+  if (pauseOnHover) {
+    carousel.addEventListener('mouseenter', () => { isHovered = true; });
+    carousel.addEventListener('mouseleave', () => { isHovered = false; });
+  }
+
+  // Événements Souris (Desktop)
   carousel.addEventListener('mousedown', (e) => {
     isDragging = true;
     lastX = e.clientX;
@@ -251,33 +263,25 @@ function initEditorialCarousel() {
     if (!isDragging) return;
     isDragging = false;
     carousel.classList.remove('is-dragging');
-    // Amortissement de relance douce au relâchement
+    // Relance douce d'inertie au relâchement
     targetX += velocity * 3.5;
   });
 
   // Événements Tactiles (Mobile)
-  carousel.addEventListener(
-    'touchstart',
-    (e) => {
-      isDragging = true;
-      lastX = e.touches[0].clientX;
-      velocity = 0;
-    },
-    { passive: true }
-  );
+  carousel.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    lastX = e.touches[0].clientX;
+    velocity = 0;
+  }, { passive: true });
 
-  window.addEventListener(
-    'touchmove',
-    (e) => {
-      if (!isDragging || !e.touches[0]) return;
-      const currentTouchX = e.touches[0].clientX;
-      const delta = currentTouchX - lastX;
-      lastX = currentTouchX;
-      targetX += delta;
-      velocity = delta;
-    },
-    { passive: true }
-  );
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || !e.touches[0]) return;
+    const currentTouchX = e.touches[0].clientX;
+    const delta = currentTouchX - lastX;
+    lastX = currentTouchX;
+    targetX += delta;
+    velocity = delta;
+  }, { passive: true });
 
   window.addEventListener('touchend', () => {
     if (!isDragging) return;
@@ -285,38 +289,39 @@ function initEditorialCarousel() {
     targetX += velocity * 3.5;
   });
 
-  // Gestion du Pad Tactile (Swipe à 2 doigts sur le côté & Shift + Molette)
-  carousel.addEventListener(
-    'wheel',
-    (e) => {
-      const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
-      const isShiftScroll = e.shiftKey && e.deltaY !== 0;
+  // Gestion du Trackpad (Swipe horizontal à 2 doigts / Shift + Molette)
+  carousel.addEventListener('wheel', (e) => {
+    const isHorizontalSwipe = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+    const isShiftScroll = e.shiftKey && e.deltaY !== 0;
 
-      if (isHorizontalSwipe || isShiftScroll) {
-        e.preventDefault(); // Empêche l'historique du navigateur de reculer/avancer
-        const delta = isHorizontalSwipe ? e.deltaX : e.deltaY;
-
-        // Application du déplacement et impulsion d'inertie
-        targetX -= delta * 1.1;
-        velocity = -delta * 0.35;
-      }
-    },
-    { passive: false }
-  );
+    if (isHorizontalSwipe || isShiftScroll) {
+      e.preventDefault();
+      const delta = isHorizontalSwipe ? e.deltaX : e.deltaY;
+      targetX -= delta * 1.1;
+      velocity = -delta * 0.35;
+    }
+  }, { passive: false });
 
   // Boucle d'animation fluide
   function animate() {
     if (singleSetWidth > 0) {
-      // Décroissance naturelle de la vélocité après relâchement
-      if (!isDragging && Math.abs(velocity) > 0.05) {
-        velocity *= 0.92;
-        targetX += velocity;
+      if (!isDragging) {
+        // Avance automatique continue si l'utilisateur ne manipule pas la piste
+        if (!pauseOnHover || !isHovered) {
+          targetX -= autoSpeed;
+        }
+
+        // Amortissement de la vélocité après un geste utilisateur (swipe ou drag)
+        if (Math.abs(velocity) > 0.05) {
+          velocity *= 0.92;
+          targetX += velocity;
+        }
       }
 
-      // Interpolation linéaire (effet feutré / fluide)
+      // Interpolation linéaire feutrée (Lerp)
       currentX += (targetX - currentX) * 0.08;
 
-      // Boucle infinie invisible : recentrage instantané dès franchissement des seuils
+      // Boucle infinie invisible : recentrage instantané
       if (currentX > -0.2 * singleSetWidth) {
         currentX -= singleSetWidth;
         targetX -= singleSetWidth;
