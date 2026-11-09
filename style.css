@@ -709,12 +709,6 @@ body {
   display: block;
 }
 
-@media screen and (max-width: 768px) {
-  .fullwidth-photo-break {
-    height: 45vh;
-    min-height: 260px;
-  }
-}
 
 /* ==========================================================================
    Détails Cérémonie & Timer Éditorial
@@ -1898,6 +1892,19 @@ body {
     margin-top: 2rem;
     padding-top: 1.8rem;
   }
+
+  /* ==========================================================================
+     INTERLUDE PHOTO : RECENTRAGE HORIZONTAL
+     ========================================================================== */
+  .fullwidth-photo-break {
+    height: 30vh;
+  }
+
+  .fullwidth-photo-img {
+    object-position: 57% center; /* Centre parfaitement l'image en largeur et hauteur */
+    object-fit: cover;
+  }
+
 
   /* ==========================================================================
      TIMERS MAIRIE & HOUPPA : JOURS AU-DESSUS & POLICE NATIVE PRÉSERVÉE
