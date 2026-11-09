@@ -104,22 +104,32 @@ function initCountdown() {
 }
 
 /**
- * 3. Validation & Traitement du Formulaire RSVP
+ * 3. Validation & Traitement du Formulaire RSVP (Connecté à Google Sheets)
  */
 function initRSVPForm() {
   const form = document.getElementById('rsvpForm');
   const statusEl = document.getElementById('formStatus');
   const submitBtn = document.getElementById('submitBtn');
+  if (!form || !statusEl || !submitBtn) return;
+
   const attendingRadios = form.elements['attending'];
   const plusOneGroup = document.getElementById('plusOneGroup');
   const dietGroup = document.getElementById('dietGroup');
 
-  Array.from(attendingRadios).forEach((radio) => {
-    radio.addEventListener('change', (e) => {
-      const isAttending = e.target.value === 'yes';
-      plusOneGroup.style.display = isAttending ? 'flex' : 'none';
+  // URL Web App Google Apps Script
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwpDNyKNUKbr3AVlMyXLsm7qDp6uV2O9h-GAXVr5G5oHSmECqYfGo3L1IDO0ZDietX5/exec';
+
+  // Affichage dynamique du nombre d'invités
+  if (attendingRadios) {
+    Array.from(attendingRadios).forEach((radio) => {
+      radio.addEventListener('change', (e) => {
+        const isAttending = e.target.value === 'yes';
+        if (plusOneGroup) {
+          plusOneGroup.style.display = isAttending ? 'flex' : 'none';
+        }
+      });
     });
-  });
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -128,46 +138,71 @@ function initRSVPForm() {
     const email = form.guestEmail.value.trim();
     const phone = form.guestPhone ? form.guestPhone.value.trim() : '';
 
+    // Validation des champs obligatoires
     if (!name || !email || !phone) {
       statusEl.className = 'form-status error';
-      statusEl.textContent =
-        "Veuillez renseigner les champs requis marqués d'un astérisque.";
+      statusEl.textContent = "Veuillez renseigner les champs requis marqués d'un astérisque.";
       return;
     }
 
+    // État d'attente sur le bouton
     submitBtn.disabled = true;
-    const initialText = submitBtn.querySelector('span').textContent;
-    submitBtn.querySelector('span').textContent = 'Transmission en cours...';
+    const btnSpan = submitBtn.querySelector('span');
+    const initialText = btnSpan ? btnSpan.textContent : 'Confirmer ma réponse';
+    if (btnSpan) btnSpan.textContent = 'Transmission en cours...';
     statusEl.textContent = '';
+    statusEl.className = 'form-status';
 
+    const isAttending = form.attending.value === 'yes';
+
+    // Objet envoyé vers Google Sheets
     const formData = {
       name: name,
       email: email,
       phone: phone,
       attending: form.attending.value,
-      guestCount: form.guestCount ? form.guestCount.value : '0',
-      message: form.guestMessage.value.trim(),
-      timestamp: new Date().toISOString(),
+      guestCount: isAttending && form.guestCount ? form.guestCount.value : '0',
+      message: form.guestMessage ? form.guestMessage.value.trim() : '',
+      timestamp: new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
     };
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1200));
-      console.log('Données RSVP :', formData);
+      // Envoi POST vers Google Apps Script
+      // Content-Type en text/plain évite le blocage CORS preflight tout en transmettant le JSON brut
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(formData)
+      });
 
+      // Confirmation visuelle pour l'invité
       statusEl.className = 'form-status success';
-      statusEl.textContent =
-        'Votre confirmation a bien été enregistrée. Merci pour votre délicatesse.';
+      statusEl.textContent = 'Votre confirmation a bien été enregistrée. Merci pour votre délicatesse.';
       form.reset();
 
-      plusOneGroup.style.display = 'flex';
-      dietGroup.style.display = 'flex';
+      // Rétablissement de l'affichage du sélecteur d'invités
+      if (plusOneGroup) plusOneGroup.style.display = 'flex';
+      if (dietGroup) dietGroup.style.display = 'flex';
+
+      // Réinitialisation visuelle du select personnalisé
+      const customSelectVal = form.querySelector('.custom-select-value');
+      if (customSelectVal && form.guestCount) {
+        customSelectVal.textContent = form.guestCount.options[0]?.text || '1 personne';
+      }
+      const customOptions = form.querySelectorAll('.custom-select-option');
+      customOptions.forEach((opt, idx) => {
+        opt.classList.toggle('is-selected', idx === 0);
+      });
+
     } catch (err) {
       statusEl.className = 'form-status error';
-      statusEl.textContent =
-        "Une erreur est survenue lors de l'envoi. Veuillez réessayer ultérieurement.";
+      statusEl.textContent = "Une erreur est survenue lors de l'envoi. Veuillez réessayer ultérieurement.";
     } finally {
       submitBtn.disabled = false;
-      submitBtn.querySelector('span').textContent = initialText;
+      if (btnSpan) btnSpan.textContent = initialText;
     }
   });
 }
