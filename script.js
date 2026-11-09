@@ -467,7 +467,7 @@ function initHouppaTimer() {
 }
 
 /**
- * Gestion de la musique de fond & du bouton flottant
+ * Gestion de la musique de fond & contournement autoplay mobile
  */
 function initBackgroundMusic() {
   const music = document.getElementById('bgMusic');
@@ -488,39 +488,46 @@ function initBackgroundMusic() {
     label.textContent = 'ACTIVER LA MUSIQUE';
   }
 
-  // 1. Tentative de lecture immédiate
-  music
-    .play()
+  // Événements d'interaction physique acceptés par iOS / Android
+  const interactionEvents = ['touchstart', 'touchend', 'click'];
+
+  function removeUnlockListeners() {
+    interactionEvents.forEach(evt => {
+      document.removeEventListener(evt, handleFirstInteraction, true);
+    });
+  }
+
+  function handleFirstInteraction() {
+    music.play()
+      .then(() => {
+        setPlayingState();
+        removeUnlockListeners(); // Se retire UNIQUEMENT si la lecture a bien démarré
+      })
+      .catch(() => {
+        // En cas de refus (ex: swipe rapide), les écouteurs restent actifs pour le prochain appui
+      });
+  }
+
+  // 1. Tentative sur Desktop
+  music.play()
     .then(setPlayingState)
     .catch(() => {
-      // Autoplay bloqué : activation au tout premier contact
+      // 2. Blocage mobile : mise en attente de la première interaction
       setMutedState();
-
-      function unlockAudio() {
-        music
-          .play()
-          .then(() => {
-            setPlayingState();
-          })
-          .catch(() => {});
-
-        document.removeEventListener('pointerdown', unlockAudio);
-        document.removeEventListener('touchstart', unlockAudio);
-        document.removeEventListener('click', unlockAudio);
-      }
-
-      document.addEventListener('pointerdown', unlockAudio, { once: true });
-      document.addEventListener('touchstart', unlockAudio, { once: true });
-      document.addEventListener('click', unlockAudio, { once: true });
+      interactionEvents.forEach(evt => {
+        document.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
+      });
     });
 
-  // 2. Clic manuel sur le bouton flottant
+  // 3. Bouton flottant manuel
   toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
 
     if (music.paused) {
-      music.play();
-      setPlayingState();
+      music.play().then(() => {
+        setPlayingState();
+        removeUnlockListeners();
+      });
     } else {
       music.pause();
       setMutedState();
