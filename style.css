@@ -1899,6 +1899,79 @@ body {
     padding-top: 1.8rem;
   }
 
+  /* ==========================================================================
+     TIMERS MAIRIE & HOUPPA : JOURS AU-DESSUS & POLICE NATIVE PRÉSERVÉE
+     ========================================================================== */
+  .ceremony-timer {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.5rem 0.6rem !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
+
+  /* 1. Bloc des JOURS (1ère ligne) */
+  .ceremony-timer > .timer-box:first-of-type {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 0.4rem !important;
+    margin-top: 1rem;
+  }
+
+  /* Chiffre des jours : uniquement la taille et la disposition */
+  .ceremony-timer > .timer-box:first-of-type .timer-num {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+    display: block !important;
+  }
+
+  /* Label "Jours" */
+  .ceremony-timer > .timer-box:first-of-type .timer-tag {
+    font-size: 0.78rem !important;
+    letter-spacing: 0.28em !important;
+    text-transform: uppercase;
+    display: block !important;
+    margin-top: 0.35rem !important;
+    opacity: 0.75;
+  }
+
+  /* 2. Masque le 1er séparateur (deux-points) après les jours */
+  .ceremony-timer > .timer-divider:first-of-type {
+    display: none !important;
+  }
+
+  /* 3. Ligne inférieure : Heures, Minutes, Secondes */
+  .ceremony-timer > .timer-box:not(:first-of-type) {
+    min-width: 48px !important;
+    text-align: center !important;
+  }
+
+  .ceremony-timer > .timer-box:not(:first-of-type) .timer-num {
+    font-size: 1.75rem !important;
+    line-height: 1 !important;
+    display: block !important;
+  }
+
+  .ceremony-timer > .timer-box:not(:first-of-type) .timer-tag {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.16em !important;
+    text-transform: uppercase;
+    display: block !important;
+    margin-top: 0.25rem !important;
+    opacity: 0.75;
+  }
+
+  /* Séparateurs restants */
+  .ceremony-timer > .timer-divider {
+    font-size: 1.4rem !important;
+    margin-bottom: 0.8rem !important;
+    opacity: 0.45 !important;
+  }
+
   .ceremony-editorial {
     padding: 3.5rem 0;
   }
